@@ -46,7 +46,7 @@ Z = [   600,  405,  800,  600,  820,  200,  400,  350,  650,  100  ;  %kcal
 % budzet tygodniowy
 B = 120;
 
-% energia pocz¹tkowa
+% energia poczatkowa
 Ep = 700;
 
 % "pelnosc brzucha"
