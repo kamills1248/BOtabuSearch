@@ -38,3 +38,5 @@ while (~isequal(Bledy_popr, Bez_bledow) && iter < 1000)
     Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
     iter = iter + 1;
 end
+
+%linia dodana do testu gita
