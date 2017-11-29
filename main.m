@@ -40,3 +40,4 @@ while (~isequal(Bledy_popr, Bez_bledow) && iter < 1000)
 end
 
 %linia dodana do testu gita
+%inna linia do usuniecia potem
