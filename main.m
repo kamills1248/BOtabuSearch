@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 clear all;
 close all;
 dane_testowe;
@@ -85,4 +84,3 @@ end
 
 %linia dodana do testu gita
 %inna linia do usuniecia potem
->>>>>>> 9885014f5f2e5f0c3765fdb0984bcb69ea5799a3
