@@ -1,7 +1,7 @@
 global R; global Z; global D; global poz_cz; global B; global S; global Ep;
 global E_max;
 
-% polozenie czlowieka
+% polozenie czlowieka 
 poz_bud = [  9, 3.5;
             14, 3.5;
             13,   4;
