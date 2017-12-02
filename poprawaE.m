@@ -22,7 +22,7 @@ for dzien = 1:5
         energia = energia - sp*przerwa(slot+1) + Z(1,k);
         if(Bledy(slot,dzien,3) ~= 0) 
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po powyuzszych zmianach
-            while(energia > E_max || energia < 0 || czas_zuzyty <= (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) <= cena_s) 
+            while(energia > E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) 
                 %dopoki energia sie nie zgadza i czas i cena beda rowne lub mniejsze poprzednim
                 rozwiazanie(slot,dzien*2-1)= randi([1 10], 1);
                 rozwiazanie(slot,dzien*2)= randi([1 10], 1);
