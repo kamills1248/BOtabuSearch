@@ -5,7 +5,7 @@ global R;
 global Bledy; %flagi dopuszczalnosci
 
 % jesli budzet jest przekroczony, to szukamu najwiekszej ceny posilku
-if (Bledy(:,:,1) ~= zeros(3,5)) 
+if (~isequal(Bledy(:,:,1),zeros(3,5))) 
     cena=0;
     for dzien = 1:5
         for slot = 1:3
