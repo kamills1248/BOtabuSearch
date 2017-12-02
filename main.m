@@ -30,7 +30,7 @@ Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
 %     Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
 %     iter = iter + 1;
 % end
-
+%
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 %% Glowny algorytm
 
