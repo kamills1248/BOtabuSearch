@@ -18,9 +18,9 @@ Bez_bledow = zeros(3,5,3);
 Bledy_pocz = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poczatkowego
     %to tylko dla naszej informacji
     
-poprawione = poprawa_rozw(rozw); %funkcja poprawiajaca rozwiazanie
-wynik2 = fc(poprawione); 
-Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
+ poprawione = poprawa_rozw(rozw); %funkcja poprawiajaca rozwiazanie
+ wynik2 = fc(poprawione); 
+ Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
 
 % jesli uda sie poprawic rozwiazanie w 1 wywolaniu funkcji poprawy to 
 % ponizsze jest niepotrzebne
@@ -32,13 +32,28 @@ Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
 % end
 %
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
+
+%% Poprawa za pomoca 3 funkcji:
+
+poprawioneB = poprawaB(rozw); 
+wynik_poprB = fc(poprawioneB); 
+Bledy_poprB = Bledy;
+
+poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca rozwiazanie
+wynik_poprC = fc(poprawioneC); 
+Bledy_poprC = Bledy;
+
+poprawioneE = poprawaB(poprawioneC); %funkcja poprawiajaca rozwiazanie
+wynik_poprE = fc(poprawioneE); 
+Bledy_poprE  = Bledy;
+
 %% Glowny algorytm
 
 % na razie tutaj, jak uda sie poprawic rozwiazanie w 1 wywolaniu funkcji 
 % poprawy to przypisanie lepiej zrobic od razu wyzej
 x_wezel = poprawione; % rozwiazanie w aktualnym wezle
 fc_wezel = wynik2; % jego wartosc funkcji celu
-
+ 
 % dalej juz normalnie
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
 fc_optym = fc_wezel; % jego wartosc funkcji celu
