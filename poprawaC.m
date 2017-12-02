@@ -22,9 +22,9 @@ for dzien = 1:5
                 rozwiazanie(slot,dzien*2)= randi([1 10], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
                 k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
-                czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji
                 od_rest = D(r,poz_cz(slot + 1,dzien)); % czas dojscia na zajecia potem
+                czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
             end    
         end
         
