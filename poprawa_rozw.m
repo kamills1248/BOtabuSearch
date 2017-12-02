@@ -7,9 +7,6 @@ przerwa = [2, 3, 3.5, 1.5]; %w [h]
 
 % jesli budzet jest przekroczony, to szukamu najwiekszej ceny posilku
 if (Bledy(:,:,1) ~= zeros(3,5)) 
-    %ten if dotyczy dwoch przejsc przez rozwiazanie, poprawiamy cene tylko
-    %gdy nie zgadza sie budzet, ale nie koniecznie w miejscu gdzie zostal
-    %przekroczony, tylko tam gdzie najwiecej wydalismy
     cena=0;
     for dzien = 1:5
         for slot = 1:3
