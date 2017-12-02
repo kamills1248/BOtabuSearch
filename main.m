@@ -6,9 +6,6 @@ dane_testowe;
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
 
-% rozw_na_pale = ones(3,10);
-% wynik_na_pale = fc(rozw_na_pale);
-
 %% Losujemy rozwiazanie poczatkowe
 rozw = randi([1 10], 3, 10);
 wynik= fc(rozw);
@@ -16,30 +13,51 @@ wynik= fc(rozw);
 %% Poprawa rozwiazania
 iter = 0;
 Bez_bledow = zeros(3,5,3);
-Bledy_pocz = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poczatkowego
-    %to tylko dla naszej informacji
-    
-poprawione = poprawa_rozw(rozw); %funkcja poprawiajaca rozwiazanie
-wynik2 = fc(poprawione); 
-Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
 
-% jesli uda sie poprawic rozwiazanie w 1 wywolaniu funkcji poprawy to 
-% ponizsze jest niepotrzebne
-% while (~isequal(Bledy_popr, Bez_bledow) && iter < 1000)
-%     poprawione = poprawa_rozw(rozw); %funkcja poprawiajaca rozwiazanie
-%     wynik2 = fc(poprawione); 
-%     Bledy_popr = Bledy; %flagi ustawione po sprawdzeniu rozwiazania poprawionego
-%     iter = iter + 1;
-% end
+%% Poprawa za pomoca 3 funkcji:
 
-% Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
+poprawioneB = poprawaB(rozw); 
+wynik_poprB = fc(poprawioneB); 
+Bledy_poprB = Bledy;
+
+poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca rozwiazanie
+wynik_poprC = fc(poprawioneC); 
+Bledy_poprC = Bledy;
+
+poprawioneE = poprawaB(poprawioneC); %funkcja poprawiajaca rozwiazanie
+wynik_poprE = fc(poprawioneE); 
+Bledy_poprE  = Bledy;
+
+iter = 0;
+while (~isequal(Bledy_poprE, Bez_bledow) && iter < 20)
+    poprawioneB = poprawaB(rozw); 
+    wynik_poprB = fc(poprawioneB); 
+    Bledy_poprB = Bledy;
+
+    poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca rozwiazanie
+    wynik_poprC = fc(poprawioneC); 
+    Bledy_poprC = Bledy;
+
+    poprawioneE = poprawaB(poprawioneC); %funkcja poprawiajaca rozwiazanie
+    wynik_poprE = fc(poprawioneE); 
+    Bledy_poprE  = Bledy;
+    iter = iter + 1;
+end
+
+% sprawdzic, czy rozwiazanie dopuszczalne - jesli nie to petla az
+% dostaniemy dopuszczalne
+if (~isequal(Bledy_poprE, Bez_bledow))
+    % while i caly powyzszy kod
+end
+
 %% Glowny algorytm
+% Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
 % na razie tutaj, jak uda sie poprawic rozwiazanie w 1 wywolaniu funkcji 
 % poprawy to przypisanie lepiej zrobic od razu wyzej
 x_wezel = poprawione; % rozwiazanie w aktualnym wezle
 fc_wezel = wynik2; % jego wartosc funkcji celu
-
+ 
 % dalej juz normalnie
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
 fc_optym = fc_wezel; % jego wartosc funkcji celu

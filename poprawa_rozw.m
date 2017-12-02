@@ -7,9 +7,6 @@ przerwa = [2, 3, 3.5, 1.5]; %w [h]
 
 % jesli budzet jest przekroczony, to szukamu najwiekszej ceny posilku
 if (Bledy(:,:,1) ~= zeros(3,5)) 
-    %ten if dotyczy dwoch przejsc przez rozwiazanie, poprawiamy cene tylko
-    %gdy nie zgadza sie budzet, ale nie koniecznie w miejscu gdzie zostal
-    %przekroczony, tylko tam gdzie najwiecej wydalismy
     cena=0;
     for dzien = 1:5
         for slot = 1:3
@@ -57,9 +54,9 @@ for dzien = 1:5
                 rozwiazanie(slot,dzien*2)= randi([1 10], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
                 k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
-                czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji
                 od_rest = D(r,poz_cz(slot + 1,dzien)); % czas dojscia na zajecia potem
+                czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
             end    
         end
         
