@@ -36,11 +36,6 @@ poprawione = poprawioneE;
 wynik = wynik_poprE;
 bledy = Bledy_poprE;
 
-% sprawdzic, czy rozwiazanie dopuszczalne - jesli nie to petla az
-% dostaniemy dopuszczalne
-if (~isequal(bledy, Bez_bledow))
-    % while i caly powyzszy kod
-end
 
 end
 

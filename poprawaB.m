@@ -4,6 +4,8 @@ function [ rozwiazanie ] = poprawaB( rozwiazanie )
 global R;
 global Bledy; %flagi dopuszczalnosci
 
+iter = 0;
+
 % jesli budzet jest przekroczony, to szukamu najwiekszej ceny posilku
 if (~isequal(Bledy(:,:,1),zeros(3,5))) 
     cena=0;
@@ -32,12 +34,13 @@ for dzien = 1:5
         % (jezli jest pare tak samo drogich, to wszystkie zmniejszymy)
         cena_s = R(r,2*k+2); % cena w danym slocie
         if (cena_s == cena)
-            while(cena_s >= cena) %dopoki cena sie nie zmiejszy
+            while(cena_s >= cena && iter <10) %dopoki cena sie nie zmiejszy
                 rozwiazanie(slot,dzien*2-1)= randi([1 10], 1);
                 rozwiazanie(slot,dzien*2)= randi([1 10], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
                 k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
                 cena_s = R(r,2*k+2);
+                iter = iter + 1;
             end
         end
         
