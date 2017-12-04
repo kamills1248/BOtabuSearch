@@ -4,6 +4,7 @@ dane_testowe;
 
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
+Bez_bledow = zeros(3,5,3);
 
 %% Losujemy rozwiazanie poczatkowe
 rozw = randi([1 10], 3, 10);
@@ -49,26 +50,83 @@ TL = zeros(3,10);
 % To ponizej to PROPOZYCJA jednej iteracji algorytmu (limit liczby iteracji!) 
 % - tzn. jednego ruchu
 
+fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
+fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
 for dzien = 1:5
     for slot = 1:3
-        r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
-        k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
+        r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
+        k = x_wezel(slot, dzien*2);  % k-ty zestaw
         
-        rw = mod(r + 1, 10);
-        rm = r - 1;
+        %sasiednie restauracje
+        rw = r + 1; %wieksza
+        if (rw == 11) 
+            rw = 1;
+        end
+        
+        rm = r - 1; %mniejsza
         if (rm == 0) 
             rm = 10;
         end
         
-        kw = mod(k + 1, 10);
+        %sasiednie zestawy
+        kw = k + 1;
+        if (kw == 11) 
+            kw = 1;
+        end
         km = k - 1;
         if (km == 0) 
             km = 10;
         end
         
-        if ()
-            
+        %wektory sasiadow
+        neigh_r = [rm, r, rw];
+        neigh_k = [km, k, kw];
+        
+        %sprawdzenie funkcji celu dla sasiadow
+        for rest=1:3
+            for zestaw=1:3
+                if(rest == 2 && zestaw == 2) 
+                   continue; %srodek otoczenia - to nie sasiad
+                end
+                
+                % wyznaczenie sasiada
+                x_chwilowe = x_wezel;
+                x_chwilowe(slot, dzien*2-1) = neigh_r(rest);
+                x_chwilowe(slot, dzien*2) = neigh_k(zestaw);
+                
+                % obliczenie funkcji celu
+                fc_chwilowe = fc(x_chwilowe);
+                
+                % sprawdzamy dopuszczalnosc rozwiazania
+                if(~isequal(Bledy, Bez_bledow)) 
+                   continue;
+                end
+                
+                % szukamy najlepszego sasiada nie na TL
+
+                
+                % SPRAWDZIC CZY x_new jest na TL !!!!!!
+                
+                % If nie jest na TL
+                    if(fc_chwilowe < fc_new)
+                        x_new = x_chwilowe;
+                        fc_new = fc_chwilowe;
+                    end
+                
+                % else - jest na TL
+                % szukamy najlepszego sasiada na TL
+                    if(fc_chwilowe < fc_new_tabu)
+                        x_new_tabu = x_chwilowe;
+                        fc_new_tabu = fc_chwilowe;
+                    end
+
+                % end - koniec sprawdzenia czy x_new jest na TL
+                
+                
+                
+            end
         end
+        
         
     end   
 end
