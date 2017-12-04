@@ -49,6 +49,10 @@ if (~isequal(Bledy_poprE, Bez_bledow))
     % while i caly powyzszy kod
 end
 
+poprawione = poprawioneE;
+wynik2 = wynik_poprE;
+
+
 %% Glowny algorytm
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
@@ -73,6 +77,8 @@ fc_optym = fc_wezel; % jego wartosc funkcji celu
 % tym slocie restauracji albo zestawie jest 'zabroniona') - co iteracje
 % algorytmu (przejscie do kolejnego sasiada) wszystkie niezerowe elementy
 % TL sa zmniejszane o 1
+
+TL = zeros(3,10); 
 
 % Takie przemyslenie:
 % musimy pamietac wokol kogo szukamy, zeby sprawdzic cale jego sasiedztwo 
