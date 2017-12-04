@@ -19,7 +19,8 @@ for dzien = 1:5
         czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
         
         %poprawa energii
-        energia = energia - sp*przerwa(slot+1) + Z(1,k);
+        energia_przed = energia;
+        energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
         if(Bledy(slot,dzien,3) ~= 0) 
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po powyuzszych zmianach
             while(energia > E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) 
@@ -31,7 +32,7 @@ for dzien = 1:5
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji
                 od_rest = D(r,poz_cz(slot + 1,dzien)); % czas dojscia na zajecia potem
                 czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
-                energia = energia - sp*przerwa(slot+1) + Z(1,k);
+                energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
              end    
          end
     end   
