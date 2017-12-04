@@ -49,7 +49,18 @@ TL = zeros(3,10);
 % To ponizej to PROPOZYCJA jednej iteracji algorytmu (limit liczby iteracji!) 
 % - tzn. jednego ruchu
 
-
+for dzien = 1:5
+    for slot = 1:3
+        r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
+        k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
+        
+       
+        if ()
+            
+        end
+        
+    end   
+end
 % Przeiteruj po wszystkich sasiadach : +-1 w kazdym slocie, dla kazdej
 % restauracji i zestawu (2^30 sasiadow) i znajdz 'nalepszego' sasiada (x_new) 
 % i najlepszego sasiada tabu (x_new_tabu):
