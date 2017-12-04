@@ -10,44 +10,11 @@ rozw = randi([1 10], 3, 10);
 wynik= fc(rozw);
 
 %% Poprawa rozwiazania
-iter = 0;
-Bez_bledow = zeros(3,5,3);
 
-%% Poprawa za pomoca 3 funkcji:
+bledy_przed = Bledy;
+[ poprawione, wynik2, bledy_po ] = poprawa_rozw(rozw);
 
-poprawioneB = poprawaB(rozw); 
-wynik_poprB = fc(poprawioneB); 
-Bledy_poprB = Bledy;
 
-poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca rozwiazanie
-wynik_poprC = fc(poprawioneC); 
-Bledy_poprC = Bledy;
-
-poprawioneE = poprawaB(poprawioneC); %funkcja poprawiajaca rozwiazanie
-wynik_poprE = fc(poprawioneE); 
-Bledy_poprE  = Bledy;
-
-iter = 0;
-while (~isequal(Bledy_poprE, Bez_bledow) && iter < 20)
-    poprawioneB = poprawaB(rozw); 
-    wynik_poprB = fc(poprawioneB); 
-    Bledy_poprB = Bledy;
-
-    poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca rozwiazanie
-    wynik_poprC = fc(poprawioneC); 
-    Bledy_poprC = Bledy;
-
-    poprawioneE = poprawaB(poprawioneC); %funkcja poprawiajaca rozwiazanie
-    wynik_poprE = fc(poprawioneE); 
-    Bledy_poprE  = Bledy;
-    iter = iter + 1;
-end
-
-% sprawdzic, czy rozwiazanie dopuszczalne - jesli nie to petla az
-% dostaniemy dopuszczalne
-if (~isequal(Bledy_poprE, Bez_bledow))
-    % while i caly powyzszy kod
-end
 
 %% Glowny algorytm
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
