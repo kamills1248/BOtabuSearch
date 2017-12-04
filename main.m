@@ -54,7 +54,18 @@ for dzien = 1:5
         r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
         k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
         
-       
+        rw = mod(r + 1, 10);
+        rm = r - 1;
+        if (rm == 0) 
+            rm = 10;
+        end
+        
+        kw = mod(k + 1, 10);
+        km = k - 1;
+        if (km == 0) 
+            km = 10;
+        end
+        
         if ()
             
         end
