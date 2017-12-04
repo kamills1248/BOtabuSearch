@@ -15,11 +15,6 @@ bledy_przed = Bledy;
 [ poprawione, wynik2, bledy_po ] = poprawa_rozw(rozw);
 
 
-
-poprawione = poprawioneE;
-wynik2 = wynik_poprE;
-
-
 %% Glowny algorytm
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
