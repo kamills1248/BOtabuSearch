@@ -2,7 +2,6 @@ clear all;
 close all;
 dane_testowe;
 
-
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
 
