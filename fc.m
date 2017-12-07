@@ -5,14 +5,17 @@ global Ep; global E_max;
 global Bledy; %flagi dopuszczalnosci
 Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 
+%uniwersalne rozmiary macierzy
+global ilosc_zestawow; global ilosc_rest; 
+
 const1 = 100; %czas
 const2 = 200; %cena
 const3 = 0.005; %zadowolenie
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
-size_R = size(R);
-juz_jedlismy = ones(size_R(2)) * 30; %30= ile razy maksymalnie jemy
-f  = 0;
+
+juz_jedlismy = ones(ilosc_zestawow) * 30; %30= ile razy maksymalnie jemy
+f  = 0;    % <- a co to? na co to komu potrzebne?
 zaplacone = 0;
 
 for dzien=1:2:9 %idziemy 1,3,5,7,9; jest 10 kolumn
