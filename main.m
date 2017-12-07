@@ -48,9 +48,9 @@ TT = 5; %Tabu Tenure - czas trwania zabronienia
 % - tzn. jednego ruchu
 iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; % liczba iteracji bez poprawy wartosci fc_optym
-max_iter_bez_poprawy = 20; %maksymalna liczba iteracji bez poprawy fc_optym
+max_iter_bez_poprawy = 50; %maksymalna liczba iteracji bez poprawy fc_optym
 
-while(iteracje < 100)
+while(iteracje < 100 )
     x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
@@ -135,13 +135,13 @@ while(iteracje < 100)
         if (fc_new < fc_optym) % dla rozwiazania nie z TL
             x_optym = x_new;
             fc_optym = fc_new;
-            iter_bez_poprawy = iter_bez_poprawy - 1; % jest poprawa
+            iter_bez_poprawy = 0; % jest poprawa
         end
         % Kryterium aspiracji
         if (fc_new_tabu < fc_optym) %(wazna silna nierownosc!)
             x_optym = x_new_tabu;
             fc_optym = fc_new_tabu;
-            iter_bez_poprawy = iter_bez_poprawy - 1;
+            iter_bez_poprawy = 0;
             x_new = x_new_tabu; % zeby moc skorygowac TL
         end
 
@@ -160,8 +160,12 @@ while(iteracje < 100)
         end
     else % jesli nie ma dopuszczalnego sasiada
           % wylosuj nowe rozwiazanie i idz do niego
+        i = 0;  
         [ x_new, fc_wezel ] = losuj_i_popraw();
-        
+        while(~isequal(Bledy, Bez_bledow) && i < 20) %jakby nie wylosowal dopuszczalnego
+            [ x_new, fc_wezel ] = losuj_i_popraw();
+            i = i + 1;
+        end        
     end
     x_wezel = x_new; % wykonaj ruch - zmien aktualny wezel
     iteracje = iteracje + 1;
