@@ -8,7 +8,7 @@ poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca czas
 poprawioneE = poprawaE(poprawioneC); %funkcja poprawiajaca energie
 
 iter = 0;
-while (~isequal(Bledy, Bez_bledow) && iter < 20)
+while (~isequal(Bledy, Bez_bledow) && iter < 100)
     poprawioneB = poprawaB(rozw); %funkcja poprawiajaca budzet
     poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca czas
     poprawioneE = poprawaE(poprawioneC); %funkcja poprawiajaca energie
