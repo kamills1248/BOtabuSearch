@@ -145,6 +145,8 @@ while(iteracje < 100)
 
 
     if(~isequal(x_new, x_zeros)) % jesli jest dopuszczalny sasiad
+        % I JESLI NIE BYLO POPRAWY PRZEZ 'JAKIS' CZAS
+        
         % WYKONAJ RUCH
         if (fc_new < fc_optym) % dla rozwiazania nie z TL
             x_optym = x_new;
@@ -171,8 +173,8 @@ while(iteracje < 100)
             end
         end
     else % jesli nie ma dopuszczalnego sasiada
-        % pamiec srednioterminowa?
-        % wylosuj nowe rozwiazanie i zabawa od nowa
+          % wylosuj nowe rozwiazanie i zabawa od nowa
+        
     end
     x_wezel = x_new;
     iteracje = iteracje + 1;

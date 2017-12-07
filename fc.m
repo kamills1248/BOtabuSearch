@@ -5,9 +5,9 @@ global Ep; global E_max;
 global Bledy; %flagi dopuszczalnosci
 Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 
-const1 = 10; %czas
-const2 = 10; %cena
-const3 = 0.001; %zadowolenie
+const1 = 100; %czas
+const2 = 200; %cena
+const3 = 0.005; %zadowolenie
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
 size_R = size(R);
