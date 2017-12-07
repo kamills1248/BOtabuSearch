@@ -4,6 +4,8 @@ function [ rozwiazanie ] = poprawaE( rozwiazanie )
 global R; global Z; global S; global D; global poz_cz;
 global Ep; global E_max;
 global Bledy; %flagi dopuszczalnosci
+%uniwersalne rozmiary macierzy:
+global ilosc_zestawow; global ilosc_rest;
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
 
@@ -26,8 +28,8 @@ for dzien = 1:5
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po powyuzszych zmianach
             while((energia > E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) && iter < 10)
                 %dopoki energia sie nie zgadza i czas i cena beda rowne lub mniejsze poprzednim
-                rozwiazanie(slot,dzien*2-1)= randi([1 10], 1);
-                rozwiazanie(slot,dzien*2)= randi([1 10], 1);
+                rozwiazanie(slot,dzien*2-1)= randi([1 ilosc_rest], 1);
+                rozwiazanie(slot,dzien*2)= randi([1 ilosc_zestawow], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
                 k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji

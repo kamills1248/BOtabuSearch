@@ -3,6 +3,8 @@ function [ rozwiazanie ] = poprawaC( rozwiazanie )
 
 global R; global Z; global S; global D; global poz_cz;
 global Bledy; %flagi dopuszczalnosci
+%uniwersalne rozmiary macierzy:
+global ilosc_zestawow; global ilosc_rest;
 
 iter = 0;
             
@@ -20,8 +22,8 @@ for dzien = 1:5
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po zmianach w budzecie
             while((czas_zuzyty >= (S(slot,dzien) + 15) || R(r,2*k+2) >= cena_s) && iter < 10) 
                 %dopoki czas sie nie zmniejszy i cena bedzie taka jak byla lub mniejsza
-                rozwiazanie(slot,dzien*2-1)= randi([1 10], 1);
-                rozwiazanie(slot,dzien*2)= randi([1 10], 1);
+                rozwiazanie(slot,dzien*2-1)= randi([1 ilosc_rest], 1);
+                rozwiazanie(slot,dzien*2)= randi([1 ilosc_zestawow], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
                 k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji
