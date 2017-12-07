@@ -1,5 +1,5 @@
 clear all;
-close all;
+% close all;
 dane_testowe;
 
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
@@ -17,42 +17,23 @@ x_zeros = zeros(3,10);
 % x_wezel - rozwiazanie w aktualnym wezle
 % fc_wezel - jego wartosc funkcji celu
 
-%% Glowny algorytm
-% Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
-% na razie tutaj, jak uda sie poprawic rozwiazanie w 1 wywolaniu funkcji 
-% poprawy to przypisanie lepiej zrobic od razu wyzej
- 
-% dalej juz normalnie
+%% Przykladowe zapisane rozwi¹zanie, ¿eby potestowaæ parametry
+load przykladowe_poczatkowe_rozw;
+x_wezel = przykladowe;
+fc_wezel = fc(x_wezel);
+
+%% Glowny algorytm
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
 fc_optym = fc_wezel; % jego wartosc funkcji celu
-
-
-%UWAGA sciana tekstu:
-% Pomysl na ruch (i jego zabronienie): ruchem jest zmiana w ktoryms slocie
-% w restauracji albo w zestawie
-% nasza lista tabu (TL) moglaby byc macierz taka jak rozwiazanie, a w komorce
-% byloby info czy ruch jest zabroniony: jesli nie jest to 0, jesli zrobimy
-% ruch to wpisujemy np. 5 (osobna zmienna na 'dlugosc listy tabu', podobno
-% uzywa sie oznaczenia tt - tabu tenure
-% (przez 5 nastepnych ruchow zmiana w tym dniu, w
-% tym slocie restauracji albo zestawie jest 'zabroniona') - co iteracje
-% algorytmu (przejscie do kolejnego sasiada) wszystkie niezerowe elementy
-% TL sa zmniejszane o 1
 
 TL = zeros(3,10);
 TT = 5; %Tabu Tenure - czas trwania zabronienia
 
-% Takie przemyslenie:
-% musimy pamietac wokol kogo szukamy, zeby sprawdzic cale jego sasiedztwo 
-% i nie zmieniac sobie wezla, wokol ktorego szukamy w trakcie szukania
-
-% To ponizej to PROPOZYCJA jednej iteracji algorytmu (limit liczby iteracji!) 
-% - tzn. jednego ruchu
 iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; % liczba iteracji bez poprawy wartosci fc_optym
 
-while(iteracje < 500 && iter_bez_poprawy < 200)
+while(iteracje < 500 && iter_bez_poprawy < 300)
     x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
@@ -130,7 +111,7 @@ while(iteracje < 500 && iter_bez_poprawy < 200)
     end
 
 
-    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < 100) 
+    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < 50) 
     % jesli jest dopuszczalny sasiad I JESLI NIE BYLO POPRAWY PRZEZ 'JAKIS' CZAS
         
       % WYKONAJ RUCH
@@ -164,13 +145,25 @@ while(iteracje < 500 && iter_bez_poprawy < 200)
           % wylosuj nowe rozwiazanie i idz do niego
         i = 0;  
         [ x_new, fc_wezel ] = losuj_i_popraw();
-        while(~isequal(Bledy, Bez_bledow) && i < 100) %jakby nie wylosowal dopuszczalnego
+        while(~isequal(Bledy, Bez_bledow) && i < 20) %jakby nie wylosowal dopuszczalnego
             [ x_new, fc_wezel ] = losuj_i_popraw();
             i = i + 1;
-        end        
+        end
+        iter_bez_poprawy = 0;        
     end
     x_wezel = x_new; % wykonaj ruch - zmien aktualny wezel
     iteracje = iteracje + 1;
     iter_bez_poprawy = iter_bez_poprawy + 1;
     fc_optym; %sprawdzenie chwilowo w kodzie
+    fc_wektor_new(iteracje) = fc_new;
+    fc_wektor_new_tabu(iteracje) = fc_new_tabu;
+    fc_wektor_optym(iteracje) = fc_optym;
 end
+
+format bank
+figure()
+plot(fc_wektor_new)
+figure()
+plot(fc_wektor_new_tabu)
+figure()
+plot(fc_wektor_optym)
