@@ -53,7 +53,7 @@ Z = [   600,  405,  800,  600,  820,  200,  400,  350,  650,  100  ;  %kcal
    
 % licze ilosc zestawow
 size_Z = size(Z);
-ilosc_rest = size_Z(2);
+ilosc_zestawow = size_Z(2);
       
       
 % budzet tygodniowy

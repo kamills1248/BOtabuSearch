@@ -10,16 +10,15 @@ Bez_bledow = zeros(3,5,3);
 x_zeros = zeros(3,10);
 
 %% Losujemy rozwiazanie poczatkowe i poprawiamy je
-[ poprawione, wynik ] = losuj_i_popraw();
-
+[ x_wezel, fc_wezel] = losuj_i_popraw();
+% x_wezel - rozwiazanie w aktualnym wezle
+% fc_wezel - jego wartosc funkcji celu
 
 %% Glowny algorytm
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
 % na razie tutaj, jak uda sie poprawic rozwiazanie w 1 wywolaniu funkcji 
 % poprawy to przypisanie lepiej zrobic od razu wyzej
-x_wezel = poprawione; % rozwiazanie w aktualnym wezle
-fc_wezel = wynik; % jego wartosc funkcji celu
  
 % dalej juz normalnie
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
@@ -129,7 +128,7 @@ while(iteracje < 100)
     if(~isequal(x_new, x_zeros)) % jesli jest dopuszczalny sasiad
         % I JESLI NIE BYLO POPRAWY PRZEZ 'JAKIS' CZAS
         
-        % WYKONAJ RUCH
+      % WYKONAJ RUCH
         if (fc_new < fc_optym) % dla rozwiazania nie z TL
             x_optym = x_new;
             fc_optym = fc_new;
@@ -155,10 +154,10 @@ while(iteracje < 100)
             end
         end
     else % jesli nie ma dopuszczalnego sasiada
-          % wylosuj nowe rozwiazanie i zabawa od nowa
-        
+          % wylosuj nowe rozwiazanie i idz do niego
+        [ x_new, fc_wezel ] = losuj_i_popraw();
     end
-    x_wezel = x_new;
+    x_wezel = x_new; % wykonaj ruch - zmien aktualny wezel
     iteracje = iteracje + 1;
     fc_optym %sprawdzenie chwilowo w kodzie
 end
