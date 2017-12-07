@@ -1,6 +1,9 @@
 global R; global Z; global D; global poz_cz; global B; global S; global Ep;
 global E_max;
 
+%uniwersalne rozmiary macierzy
+global ilosc_zestawow; global ilosc_rest; 
+
 % polozenie czlowieka 
 poz_bud = [  9, 3.5;
             14, 3.5;
@@ -37,12 +40,22 @@ r2 = [ 1000,  100,    5,   2,    7,   5,    6,    4, 1000, 100, 1000, 100  ;  %D
         
 R = [r1, r2];
 
+% licze ilosc restauracji
+size_R = size(R);
+ilosc_rest = size_R(1);
+
+
 % zestawy
 %       z1     z2    z3    z4    z5    z6    z7    z8    z9   z10
 Z = [   600,  405,  800,  600,  820,  200,  400,  350,  650,  100  ;  %kcal
          20,   10,   13,   15,   10,    4,    8,    5,   10,    3  ;  %czas konsumpcji
           9,    8,    7,    6,    9,    4,    6,    3,    5,    2 ];  %ocena
    
+% licze ilosc zestawow
+size_Z = size(Z);
+ilosc_rest = size_Z(2);
+      
+      
 % budzet tygodniowy
 B = 120;
 
@@ -60,6 +73,8 @@ S = [   30,     20,     25,     15,     30 ;  %slot 1 od 10
      
 % macierz odleglosci knajp od budynkow z zajeciami
 % restauracje \ budynki
+
+ 
 D = [(abs(R(:,1) - poz_bud(1,1)) + abs(R(:,2) - poz_bud(1,2))),...
      (abs(R(:,1) - poz_bud(2,1)) + abs(R(:,2) - poz_bud(2,2))),...
      (abs(R(:,1) - poz_bud(3,1)) + abs(R(:,2) - poz_bud(3,2))),...
