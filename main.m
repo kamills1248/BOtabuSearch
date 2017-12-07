@@ -4,6 +4,9 @@ dane_testowe;
 
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
+%uniwersalne rozmiary macierzy:
+global ilosc_zestawow; global ilosc_rest;
+
 % Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 % inicjowane przy pierwszym przebiegu fc
 Bez_bledow = zeros(3,5,3);
@@ -61,23 +64,23 @@ while(iteracje < 100 )
 
             %sasiednie restauracje
             rw = r + 1; %wieksza
-            if (rw == 11) 
+            if (rw == (ilosc_rest + 1)) 
                 rw = 1;
             end
 
             rm = r - 1; %mniejsza
             if (rm == 0) 
-                rm = 10;
+                rm = ilosc_rest;
             end
 
             %sasiednie zestawy
             kw = k + 1;
-            if (kw == 11) 
+            if (kw == (ilosc_zestawow + 1)) 
                 kw = 1;
             end
             km = k - 1;
             if (km == 0) 
-                km = 10;
+                km = ilosc_zestawow;
             end
 
             %wektory sasiadow
