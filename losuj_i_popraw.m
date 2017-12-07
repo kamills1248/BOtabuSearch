@@ -17,6 +17,8 @@ for dzien = 1:5
     end
 end
 
+fc(rozw); %obliczamy fc I USTAWIAMY FLAGI BLEDOW; nie chcemy wyniku
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % to ponizej zostawiam, bo jakby cos wyzej nie dzialalo, to to ponizej juz
 % dzialalo
