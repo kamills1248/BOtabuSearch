@@ -10,7 +10,8 @@ const2 = 10; %cena
 const3 = 0.001; %zadowolenie
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
-
+size_R = size(R);
+juz_jedlismy = ones(size_R(2)) * 30; %30= ile razy maksymalnie jemy
 f  = 0;
 zaplacone = 0;
 
@@ -23,7 +24,8 @@ for dzien=1:2:9 %idziemy 1,3,5,7,9; jest 10 kolumn
         do_rest = D(r,poz_cz(slot,ceil(dzien/2))); % czas dojscia do restauracji
         %ceil bo po dniach idziemy co 2, a w macierzy poz_cz chcemy co 1
         od_rest = D(r,poz_cz(slot + 1,ceil(dzien/2))); % czas dojscia na zajecia potem
-            
+        juz_jedlismy(k) = juz_jedlismy(k) - 1; % gdy zjemy to samo to zadowolenie maleje
+        
         %sprawdzenie dopuszczalnosci rozwiazania
         %budzet
         zaplacone = zaplacone + R(r,2*k+2);
@@ -52,10 +54,10 @@ for dzien=1:2:9 %idziemy 1,3,5,7,9; jest 10 kolumn
 %            f = inf;
         end
                 
-        %f = f + czas(konsumpcja + przygotowanie + dojscie "*2") +
-        % + cena - zadowolenie(zestaw * restauracja * energetycznosc)
+        %f = f + czas(konsumpcja + przygotowanie + dojscie "*2") + cena 
+        % - zadowolenie(roznorodnosc * zestaw * restauracja * energetycznosc)
         f = f + const1*(czas_zuzyty) + const2*(R(r,2*k+2)) - ...
-            const3*(Z(3,k)*R(r,3)*Z(1,k));  
+            const3*(juz_jedlismy(k)*Z(3,k)*R(r,3)*Z(1,k));  
         
     end
 end
