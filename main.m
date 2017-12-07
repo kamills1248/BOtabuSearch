@@ -48,9 +48,8 @@ TT = 5; %Tabu Tenure - czas trwania zabronienia
 % - tzn. jednego ruchu
 iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; % liczba iteracji bez poprawy wartosci fc_optym
-max_iter_bez_poprawy = 50; %maksymalna liczba iteracji bez poprawy fc_optym
 
-while(iteracje < 100 )
+while(iteracje < 200 && iter_bez_poprawy < 100)
     x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
@@ -128,7 +127,7 @@ while(iteracje < 100 )
     end
 
 
-    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < max_iter_bez_poprawy) 
+    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < 50) 
     % jesli jest dopuszczalny sasiad I JESLI NIE BYLO POPRAWY PRZEZ 'JAKIS' CZAS
         
       % WYKONAJ RUCH
