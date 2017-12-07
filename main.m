@@ -4,40 +4,22 @@ dane_testowe;
 
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
+% Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
+% inicjowane przy pierwszym przebiegu fc
 Bez_bledow = zeros(3,5,3);
 x_zeros = zeros(3,10);
 
-%% Losujemy rozwiazanie poczatkowe
-rozw = randi([1 10], 3, 10);
-wynik= fc(rozw);
+%% Losujemy rozwiazanie poczatkowe i poprawiamy je
+[ poprawione, wynik ] = losuj_i_popraw();
 
-%% Poprawa rozwiazania
 
-bledy_przed = Bledy;
-[ poprawione, wynik2, bledy_po ] = poprawa_rozw(rozw);
-
-% sprawdzic, czy rozwiazanie dopuszczalne - jesli nie to petla az
-% dostaniemy dopuszczalne
-if (~isequal(bledy_po, Bez_bledow))
-    i = 0;
-    while(~isequal(bledy_po, Bez_bledow) && i < 20)
-        rozw = randi([1 10], 3, 10);
-        wynik= fc(rozw);
-        bledy_przed = Bledy;
-        [ poprawione, wynik2, bledy_po ] = poprawa_rozw(rozw);
-        i = i + 1;
-    end
-    if (i >= 20)
-       warning('Brak rozwiazania dopuszczalnego');
-    end
-end
 %% Glowny algorytm
 % Tutaj mamy juz pierwsze rozwiazanie dopuszczalne
 
 % na razie tutaj, jak uda sie poprawic rozwiazanie w 1 wywolaniu funkcji 
 % poprawy to przypisanie lepiej zrobic od razu wyzej
 x_wezel = poprawione; % rozwiazanie w aktualnym wezle
-fc_wezel = wynik2; % jego wartosc funkcji celu
+fc_wezel = wynik; % jego wartosc funkcji celu
  
 % dalej juz normalnie
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
