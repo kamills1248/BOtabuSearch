@@ -167,3 +167,5 @@ figure()
 plot(fc_wektor_new_tabu)
 figure()
 plot(fc_wektor_optym)
+
+mapa(x_optym, 5);
