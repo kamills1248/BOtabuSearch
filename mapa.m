@@ -44,7 +44,7 @@ nazwa_rest = {'Dagrasso  ';
              
 % petla po liczbie dni             
 for dzien=1:liczba_dni
-    figure(dzien)
+    figure()
     imshow(plan);
     title(['dzien nr ' num2str(dzien)]);
     hold on;
