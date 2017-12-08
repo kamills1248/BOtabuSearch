@@ -25,6 +25,8 @@ new_poz_rest = [ 352,  93; %Dagrasso
                  851, 352; %Zaczek
                  779, 115]; %Barek
 
+% ponizej dwa wektory nazw, zwroccie uwage ze sa w nawiasach klamrowych "{
+% }" oraz, ze kazdy element macierzy musi miec tyle samo znakow
 nazwa_budynku = {   'B1';
                     'C1';
                     'C2';
@@ -108,10 +110,16 @@ for dzien=1:liczba_dni
     for i=1:(3+4)
         if(mod(i,2) ~= 0)
             nr_b = nr_budynku((i+1)/2);
+            
+            %podzielilem to na dwukrotne wypisywanie tekstu, bo za cholere
+            %nie chcialo dzialac jak bylo w jednej linijce:
             text(10, 10+(i*20), [num2str(i) ': ']);
             text(30, 10+(i*20), nazwa_budynku(nr_b));
         else
             nr_r = nr_rest(i/2);
+            
+            %podzielilem to na dwukrotne wypisywanie tekstu, bo za cholere
+            %nie chcialo dzialac jak bylo w jednej linijce:
             text(10, 10+(i*20), [num2str(i) ': ']);
             text(30, 10+(i*20), nazwa_rest(nr_r));
         end
