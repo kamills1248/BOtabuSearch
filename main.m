@@ -18,7 +18,7 @@ x_zeros = zeros(3,10);
 % fc_wezel - jego wartosc funkcji celu
 
 
-%% Przykladowe zapisane rozwi¹zanie, ¿eby potestowaæ parametry
+%% Przykladowe zapisane rozwiazanie, zeby potestowac parametry
 load przykladowe_poczatkowe_rozw;
 x_wezel = przykladowe;
 fc_wezel = fc(x_wezel);
@@ -27,7 +27,7 @@ fc_wezel = fc(x_wezel);
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
 fc_optym = fc_wezel; % jego wartosc funkcji celu
 
-TL = zeros(3,10);
+TL = zeros(3,10); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
 
 iteracje = 0; %iteracje algorytmu (ruchy)
@@ -37,7 +37,8 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
     x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
-    for dzien = 1:5
+    
+    for dzien = 1:5 %przejscie po macierzy rozwiazania
         for slot = 1:3
             r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
@@ -47,7 +48,6 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
             if (rw == (ilosc_rest + 1)) 
                 rw = 1;
             end
-
             rm = r - 1; %mniejsza
             if (rm == 0) 
                 rm = ilosc_rest;
@@ -68,8 +68,8 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
             neigh_k = [km, k, kw];
 
             %sprawdzenie funkcji celu dla sasiadow
-            for rest=1:3
-                for zestaw=1:3
+            for rest = 1:3
+                for zestaw = 1:3
                     if(rest == 2 && zestaw == 2) 
                        continue; %srodek otoczenia - to nie sasiad
                     end
@@ -79,27 +79,25 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
                     x_chwilowe(slot, dzien*2-1) = neigh_r(rest);
                     x_chwilowe(slot, dzien*2) = neigh_k(zestaw);
 
-                    % obliczenie funkcji celu
+                    % obliczenie funkcji celu (+ustawienie flag Bledy)
                     fc_chwilowe = fc(x_chwilowe);
 
                     % sprawdzamy dopuszczalnosc rozwiazania
                     if(~isequal(Bledy, Bez_bledow))
                         fc_chwilowe = inf;
-                       continue;
+                        continue;
                     end
 
-                    % szukamy najlepszego sasiada nie na TL
-
-
-                    % SPRAWDZ CZY x_new TL
+                    % SPRAWDZ CZY x_chwilowe jest na TL
                     % If nie jest na TL
                     if(TL(slot, dzien*2-1) == 0 &&  TL(slot, dzien*2) == 0)
+                        % szukamy najlepszego sasiada nie na TL
                         if(fc_chwilowe < fc_new)
                             x_new = x_chwilowe;
                             fc_new = fc_chwilowe;
                         end
                     else % jest na TL
-                    % szukamy najlepszego sasiada na TL
+                        % szukamy najlepszego sasiada na TL
                         if(fc_chwilowe < fc_new_tabu)
                             x_new_tabu = x_chwilowe;
                             fc_new_tabu = fc_chwilowe;
@@ -108,53 +106,51 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
                 end
             end     
         end   
-    end
+    end %end: przejscie po macierzy rozwiazania
 
 
     if(~isequal(x_new, x_zeros) && iter_bez_poprawy < 50) 
-    % jesli jest dopuszczalny sasiad I JESLI NIE BYLO POPRAWY PRZEZ 'JAKIS' CZAS
-        
+    % jesli jest dopuszczalny sasiad i 'niedawno' byla poprawa
       % WYKONAJ RUCH
         if (fc_new < fc_optym) % dla rozwiazania nie z TL
             x_optym = x_new;
             fc_optym = fc_new;
             iter_bez_poprawy = 0; % jest poprawa
         end
-        % Kryterium aspiracji
+        % Kryterium aspiracji dla rozwiazania z TL
         if (fc_new_tabu < fc_optym) %(wazna silna nierownosc!)
             x_optym = x_new_tabu;
             fc_optym = fc_new_tabu;
-            iter_bez_poprawy = 0;
-            x_new = x_new_tabu; % zeby moc skorygowac TL
+            iter_bez_poprawy = 0; % jest poprawa
+            x_new = x_new_tabu; % zeby moc latwo skorygowac TL
         end
 
         % KOREKTA LISTY TABU
         x_diff = x_new - x_wezel; % sprawdzamy gdzie sie ruszylismy
         for i = 1:3 % Przeiteruj po TL, 
             for j = 1:10
-                if(TL(i,j) > 0)
-                   TL(i,j) = TL(i,j) - 1; %jesli element jest > 0 to zmniejsz go o 1 
+                if(TL(i,j) > 0) %jesli element jest > 0 to zmniejsz go o 1 
+                   TL(i,j) = TL(i,j) - 1; 
                 end
                 % Na podstawie x_wezel i x_new (czyli gdzie bylismy i gdzie jestesmy)
-                if(x_diff(i,j) ~= 0) 
+                if(x_diff(i,j) ~= 0) %zabronienie wykonanego ruchu
                     TL(i,j) = TT; %Tabu Tenure
                 end
             end
-        end
-    else % jesli nie ma dopuszczalnego sasiada
-          % wylosuj nowe rozwiazanie i idz do niego
-        i = 0;  
+        end %end: przeiteruj po TL
+    else % jesli nie ma dopuszczalnego sasiada lub 'dlugo' nie bylo poprawy
+            % to wylosuj nowe rozwiazanie i idz do niego
+        i = 0;
         [ x_new, fc_wezel ] = losuj_i_popraw();
         while(~isequal(Bledy, Bez_bledow) && i < 20) %jakby nie wylosowal dopuszczalnego
             [ x_new, fc_wezel ] = losuj_i_popraw();
             i = i + 1;
         end
-        iter_bez_poprawy = 0;        
+        iter_bez_poprawy = 0; % zaczynamy od nowego rozwiazania, dajemy mu szanse
     end
     x_wezel = x_new; % wykonaj ruch - zmien aktualny wezel
     iteracje = iteracje + 1;
     iter_bez_poprawy = iter_bez_poprawy + 1;
-    fc_optym; %sprawdzenie chwilowo w kodzie
     fc_wektor_new(iteracje) = fc_new;
     fc_wektor_new_tabu(iteracje) = fc_new_tabu;
     fc_wektor_optym(iteracje) = fc_optym;
