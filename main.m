@@ -31,9 +31,19 @@ TL = zeros(3,10); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
 
 iteracje = 0; %iteracje algorytmu (ruchy)
-iter_bez_poprawy = 0; % liczba iteracji bez poprawy wartosci fc_optym
+iter_bez_poprawy = 0; %liczba iteracji bez poprawy wartosci fc_optym
 
-while(iteracje < 500 && iter_bez_poprawy < 300)
+iteracje_lim = 500; %limit liczby iteracji algortymu (ruchow)
+iter_bez_poprawy_lim = 50; %limit liczby iteracji bez poprawy fc_optym gdy
+%osiagniemy ten limit to losujemy nowe rozwiazanie i zerujemy iter_bez_poprawy
+
+% prealokacja pamieci dla wektorow, zeby bylo jeszcze szybciej
+fc_wektor_new = zeros(1, iteracje_lim);
+fc_wektor_new_tabu = zeros(1, iteracje_lim);
+fc_wektor_optym = zeros(1, iteracje_lim);
+
+
+while(iteracje < iteracje_lim )
     x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
@@ -157,11 +167,23 @@ while(iteracje < 500 && iter_bez_poprawy < 300)
 end
 
 format bank
-figure()
+figure() %najlepszy sasiad
 plot(fc_wektor_new)
-figure()
+title('Wartoœæ funkcji celu dla najlepszego s¹siada');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
+
+figure() %najlepszy sasiad z TL
 plot(fc_wektor_new_tabu)
-figure()
+title('Wartoœæ funkcji celu dla najlepszego s¹siada z TL');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
+
+figure() %najlepszy dotad znaleziony
 plot(fc_wektor_optym)
+title('Wartoœæ funkcji celu dla najlepszego znalezionego wêz³a');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
+
 
 mapa(x_optym, 5);
