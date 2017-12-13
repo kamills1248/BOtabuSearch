@@ -27,7 +27,13 @@ fc_wezel = fc(x_wezel);
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
 fc_optym = fc_wezel; % jego wartosc funkcji celu
 
-TL = zeros(3,10); %Lista Tabu - zabronienia niedawnych ruchow
+% zmienne do uogolnienia przebiegu algorytmu
+x_size = size(x_optym);
+liczba_slotow = x_size(1); %liczba slotow w danej instancji; zakladamy = 3
+liczba_dni = x_size(2)/2; %liczba dni w danej instancji /2 bo na kazdy dzien 
+       %po 2 kolumny - restauracje i zestawy; moze sie zmieniac
+
+TL = zeros(x_size); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
 
 iteracje = 0; %iteracje algorytmu (ruchy)
@@ -44,15 +50,20 @@ fc_wektor_optym = zeros(1, iteracje_lim);
 
 
 while(iteracje < iteracje_lim )
-    x_new = zeros(3,10); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
+    x_new = zeros(x_size); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
     
-    for dzien = 1:5 %przejscie po macierzy rozwiazania
-        for slot = 1:3
+    for dzien = 1:liczba_dni %przejscie po macierzy rozwiazania
+        for slot = 1:liczba_slotow
             r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
 
+            %zadajem liczbe sasiadow, jeszcze nie w pelni automatyczne
+            liczba_sasiadow = 3; %liczba sasiadow + 1 bo uwzgledniamy srodek otoczenia
+            srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
+
+% wrzucic w fora to nizej
             %sasiednie restauracje
             rw = r + 1; %wieksza
             if (rw == (ilosc_rest + 1)) 
@@ -76,11 +87,12 @@ while(iteracje < iteracje_lim )
             %wektory sasiadow
             neigh_r = [rm, r, rw];
             neigh_k = [km, k, kw];
+% wrzucic w fora to wyzej
 
             %sprawdzenie funkcji celu dla sasiadow
-            for rest = 1:3
-                for zestaw = 1:3
-                    if(rest == 2 && zestaw == 2) 
+            for rest = 1:liczba_sasiadow
+                for zestaw = 1:liczba_sasiadow
+                    if(rest == srodek_otoczenia && zestaw == srodek_otoczenia) 
                        continue; %srodek otoczenia - to nie sasiad
                     end
 
@@ -186,4 +198,4 @@ xlabel('Numer iteracji');
 ylabel('Wartoœæ funkcji celu');
 
 
-mapa(x_optym, 5);
+mapa(x_optym, liczba_dni);
