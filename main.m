@@ -66,37 +66,49 @@ while(iteracje < iteracje_lim )
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
             
             mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) = mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) + 1; % dodajemy 1 do mapy kolorow rozwiazania
-             
-            %zadajem liczbe sasiadow, jeszcze nie w pelni automatyczne
-            liczba_sasiadow = 3; %liczba sasiadow + 1 bo uwzgledniamy srodek otoczenia
+              
+            %zadajemy liczbe sasiadow
+            liczba_sasiadow = 5; %liczba sasiadow w wierszu i kolumnie + 1 
+                %bo uwzgledniamy srodek otoczenia; 'kwadratowe' otoczenie
             srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
-
-% wrzucic w fora to nizej
+        
+            %wyznaczenie sasiadow
             %sasiednie restauracje
-            rw = r + 1; %wieksza
-            if (rw == (ilosc_rest + 1)) 
-                rw = 1;
-            end
-            rm = r - 1; %mniejsza
-            if (rm == 0) 
-                rm = ilosc_rest;
-            end
-
+            neigh_r = ones(1, liczba_sasiadow) * r; %wszedzie wpisuje srodek otoczenia
             %sasiednie zestawy
-            kw = k + 1;
-            if (kw == (ilosc_zestawow + 1)) 
-                kw = 1;
-            end
-            km = k - 1;
-            if (km == 0) 
-                km = ilosc_zestawow;
-            end
+            neigh_k = ones(1, liczba_sasiadow) * k; %wszedzie wpisuje srodek otoczenia
 
-            %wektory sasiadow
-            neigh_r = [rm, r, rw];
-            neigh_k = [km, k, kw];
-% wrzucic w fora to wyzej
-
+            %zmieniam indeksy na lewo od srodka otoczenia
+            for i = 1:(srodek_otoczenia-1)
+                odleglosc_sasiada = srodek_otoczenia - i; %jak dalego od srodka
+                %dla restauracji
+                neigh_r(i) = neigh_r(i) - odleglosc_sasiada;
+                if(neigh_r(i) < 1) %sprawdzenie czy sie nie przekrecilo
+                    neigh_r(i) = neigh_r(i) + ilosc_rest;
+                end
+                %dla zestawow
+                neigh_k(i) = neigh_k(i) - odleglosc_sasiada;
+                if(neigh_k(i) < 1)
+                    neigh_k(i) = neigh_k(i) + ilosc_zestawow;
+                end
+            end
+            
+            %zmieniam indeksy na prawo od srodka otoczenia
+            for i = (srodek_otoczenia+1):liczba_sasiadow
+                odleglosc_sasiada = i - srodek_otoczenia; %jak dalego od srodka
+                %dla restauracji
+                neigh_r(i) = neigh_r(i) + odleglosc_sasiada;
+                if(neigh_r(i) > ilosc_rest) %sprawdzenie czy sie nie przekrecilo
+                    neigh_r(i) = neigh_r(i) - ilosc_rest;
+                end
+                %dla zestawow
+                neigh_k(i) = neigh_k(i) + odleglosc_sasiada;
+                if(neigh_k(i) > ilosc_zestawow)
+                    neigh_k(i) = neigh_k(i) - ilosc_zestawow;
+                end
+            end
+            %koniec wyznaczenia sasiadow
+            
             %sprawdzenie funkcji celu dla sasiadow
             for rest = 1:liczba_sasiadow
                 for zestaw = 1:liczba_sasiadow
