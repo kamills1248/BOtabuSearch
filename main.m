@@ -48,6 +48,9 @@ fc_wektor_new = zeros(1, iteracje_lim);
 fc_wektor_new_tabu = zeros(1, iteracje_lim);
 fc_wektor_optym = zeros(1, iteracje_lim);
 
+mapa_kolorow = zeros(liczba_slotow*ilosc_zestawow,liczba_dni*ilosc_rest); % 3 sloty * 10 zestawów na 5 dni * 10 restauracji
+mapa_kolorow_sasiedzi = zeros(liczba_slotow*ilosc_zestawow,liczba_dni*ilosc_rest); % 3 sloty * 10 zestawów na 5 dni * 10 restauracji
+mapa_kolorow_dzien_slot = zeros(ilosc_zestawow, ilosc_rest); 
 
 while(iteracje < iteracje_lim )
     x_new = zeros(x_size); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
@@ -58,7 +61,12 @@ while(iteracje < iteracje_lim )
         for slot = 1:liczba_slotow
             r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
-
+            
+            mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) = mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) + 1; % dodajemy 1 do mapy kolorow rozwiazania
+            if (dzien == 1 && slot == 1)
+                mapa_kolorow_dzien_slot(k,r) = mapa_kolorow_dzien_slot(k,r)+1;
+            end
+             
             %zadajem liczbe sasiadow, jeszcze nie w pelni automatyczne
             liczba_sasiadow = 3; %liczba sasiadow + 1 bo uwzgledniamy srodek otoczenia
             srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
@@ -92,10 +100,13 @@ while(iteracje < iteracje_lim )
             %sprawdzenie funkcji celu dla sasiadow
             for rest = 1:liczba_sasiadow
                 for zestaw = 1:liczba_sasiadow
+                    mapa_kolorow_sasiedzi((slot-1)*10+neigh_k(zestaw),(dzien-1)*10+neigh_r(rest)) =...
+                        mapa_kolorow_sasiedzi((slot-1)*10+neigh_k(zestaw),(dzien-1)*10+neigh_r(rest)) + 1;
+                    
                     if(rest == srodek_otoczenia && zestaw == srodek_otoczenia) 
                        continue; %srodek otoczenia - to nie sasiad
                     end
-
+                    
                     % wyznaczenie sasiada
                     x_chwilowe = x_wezel;
                     x_chwilowe(slot, dzien*2-1) = neigh_r(rest);
@@ -178,24 +189,45 @@ while(iteracje < iteracje_lim )
     fc_wektor_optym(iteracje) = fc_optym;
 end
 
-format bank
-figure() %najlepszy sasiad
-plot(fc_wektor_new)
-title('Wartoœæ funkcji celu dla najlepszego s¹siada');
-xlabel('Numer iteracji');
-ylabel('Wartoœæ funkcji celu');
+% figure() %najlepszy sasiad
+% plot(fc_wektor_new)
+% title('Wartoœæ funkcji celu dla najlepszego s¹siada');
+% xlabel('Numer iteracji');
+% ylabel('Wartoœæ funkcji celu');
+% 
+% figure() %najlepszy sasiad z TL
+% plot(fc_wektor_new_tabu)
+% title('Wartoœæ funkcji celu dla najlepszego s¹siada z TL');
+% xlabel('Numer iteracji');
+% ylabel('Wartoœæ funkcji celu');
+% 
+% figure() %najlepszy dotad znaleziony
+% plot(fc_wektor_optym)
+% title('Wartoœæ funkcji celu dla najlepszego znalezionego wêz³a');
+% xlabel('Numer iteracji');
+% ylabel('Wartoœæ funkcji celu');
+%%
+figure()
+imagesc(mapa_kolorow);
+colormap(jet)
+colorbar
+figure()
+imagesc(mapa_kolorow_dzien_slot);
+colormap(jet)
+colorbar
+figure()
 
-figure() %najlepszy sasiad z TL
-plot(fc_wektor_new_tabu)
-title('Wartoœæ funkcji celu dla najlepszego s¹siada z TL');
-xlabel('Numer iteracji');
-ylabel('Wartoœæ funkcji celu');
+imagesc(mapa_kolorow_sasiedzi);
+colormap(jet)
+colorbar
+line([10.5 10.5], [30.5 0.5],'Color','black')
+line([20.5 20.5], [30.5 0.5],'Color','black')
+line([30.5 30.5], [30.5 0.5],'Color','black')
+line([40.5 40.5], [30.5 0.5],'Color','black')
+line([50.5 50.5], [30.5 0.5],'Color','black')
 
-figure() %najlepszy dotad znaleziony
-plot(fc_wektor_optym)
-title('Wartoœæ funkcji celu dla najlepszego znalezionego wêz³a');
-xlabel('Numer iteracji');
-ylabel('Wartoœæ funkcji celu');
+line([0.5 50.5], [10.5 10.5],'Color','black')
+line([0.5 50.5], [20.5 20.5],'Color','black')
+line([0.5 50.5], [30.5 30.5],'Color','black')
 
-
-mapa(x_optym, liczba_dni);
+%mapa(x_optym, liczba_dni);
