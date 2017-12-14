@@ -5,7 +5,7 @@ dane_testowe;
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
 %uniwersalne rozmiary macierzy:
-global ilosc_zestawow; global ilosc_rest;
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni
 
 % Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 % inicjowane przy pierwszym przebiegu fc
@@ -30,8 +30,8 @@ fc_optym = fc_wezel; % jego wartosc funkcji celu
 % zmienne do uogolnienia przebiegu algorytmu
 x_size = size(x_optym);
 liczba_slotow = x_size(1); %liczba slotow w danej instancji; zakladamy = 3
-liczba_dni = x_size(2)/2; %liczba dni w danej instancji /2 bo na kazdy dzien 
-       %po 2 kolumny - restauracje i zestawy; moze sie zmieniac
+% liczba_dni = x_size(2)/2; %liczba dni w danej instancji /2 bo na kazdy dzien 
+%        %po 2 kolumny - restauracje i zestawy; moze sie zmieniac
 
 TL = zeros(x_size); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
@@ -48,24 +48,24 @@ fc_wektor_new = zeros(1, iteracje_lim);
 fc_wektor_new_tabu = zeros(1, iteracje_lim);
 fc_wektor_optym = zeros(1, iteracje_lim);
 
-mapa_kolorow = zeros(liczba_slotow*ilosc_zestawow,liczba_dni*ilosc_rest); % 3 sloty * 10 zestawów na 5 dni * 10 restauracji
-mapa_kolorow_sasiedzi = zeros(liczba_slotow*ilosc_zestawow,liczba_dni*ilosc_rest); % 3 sloty * 10 zestawów na 5 dni * 10 restauracji
-mapa_kolorow_dzien_slot = zeros(ilosc_zestawow, ilosc_rest); 
+% mapy kolorow - kolorystycznie zaznaczenie odwiedzonych miejsc
+% na poczatku wszystkie punktu maja wartosc zero, a jesli w dane miejce
+% pojdziemy (restauracja i zestaw w danym dniu i slocie) to dodajemy 1 i
+% dzieki temu zmienia sie kolor na cieplejszy
+mapa_kolorow = zeros(liczba_slotow*ilosc_zestawow,ilosc_dni*ilosc_rest); % dla wybranych wezlow rozwiazania
+mapa_kolorow_sasiedzi = zeros(liczba_slotow*ilosc_zestawow,ilosc_dni*ilosc_rest); % dla wszystkich sasiadow, ktorych sprawdzamy
 
 while(iteracje < iteracje_lim )
     x_new = zeros(x_size); % inicjalizacja zeby sprawdzic czy jest dopuszczalny sasiad
     fc_new = inf; % wartosc funkcji celu najlepszego sasiada nie na TL
     fc_new_tabu = inf; % wartosc funkcji celu najlepszego sasiada na TL
     
-    for dzien = 1:liczba_dni %przejscie po macierzy rozwiazania
+    for dzien = 1:ilosc_dni %przejscie po macierzy rozwiazania
         for slot = 1:liczba_slotow
             r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
             
             mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) = mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) + 1; % dodajemy 1 do mapy kolorow rozwiazania
-            if (dzien == 1 && slot == 1)
-                mapa_kolorow_dzien_slot(k,r) = mapa_kolorow_dzien_slot(k,r)+1;
-            end
              
             %zadajem liczbe sasiadow, jeszcze nie w pelni automatyczne
             liczba_sasiadow = 3; %liczba sasiadow + 1 bo uwzgledniamy srodek otoczenia
@@ -208,26 +208,41 @@ end
 % ylabel('Wartoœæ funkcji celu');
 %%
 figure()
-imagesc(mapa_kolorow);
-colormap(jet)
-colorbar
+imagesc(mapa_kolorow); % "sc" na koncu image okresla wyskalowanie kolorow
+colormap(jet) % okreslenie kolorystyki 
+colorbar % wyswietlenie skali kolorystycznej 
+title('mapa kolorow wezlow wybranych')
+% rysowanie linii oddzielaj¹cych dni (tylko pomiedzy dniami)
+for d = 1:ilosc_dni-1
+    line([ilosc_rest*d + 0.5 ilosc_rest*d + 0.5], ...
+        [ilosc_zestawow*liczba_slotow + 0.5 ilosc_zestawow*liczba_slotow + 0.5],...
+        'Color','black','LineWidth',3)
+end
+% rysowanie linii oddzielaj¹cych sloty (tylko pomiedzy slotami)
+for s = 1:liczba_slotow-1
+    line([0.5 ilosc_dni*ilosc_rest + 0.5], ...
+        [s*ilosc_zestawow + 0.5 s*ilosc_zestawow + 0.5],...
+        'Color','black','LineWidth',3)
+end
+
+
 figure()
-imagesc(mapa_kolorow_dzien_slot);
-colormap(jet)
-colorbar
-figure()
+imagesc(mapa_kolorow_sasiedzi);  % "sc" na koncu image okresla wyskalowanie kolorow
+colormap(jet) % okreslenie kolorystyki 
+colorbar % wyswietlenie skali kolorystycznej
+title('mapa kolorow wezlow sasiednich')
+% rysowanie linii oddzielajacych dni (tylko pomiedzy dniami)
+for d = 1:ilosc_dni-1
+    line([ilosc_rest*d + 0.5 ilosc_rest*d + 0.5], ...
+        [ilosc_zestawow*liczba_slotow + 0.5 ilosc_zestawow*liczba_slotow + 0.5],...
+        'Color','black','LineWidth',3)
 
-imagesc(mapa_kolorow_sasiedzi);
-colormap(jet)
-colorbar
-line([10.5 10.5], [30.5 0.5],'Color','black')
-line([20.5 20.5], [30.5 0.5],'Color','black')
-line([30.5 30.5], [30.5 0.5],'Color','black')
-line([40.5 40.5], [30.5 0.5],'Color','black')
-line([50.5 50.5], [30.5 0.5],'Color','black')
+end
+% rysowanie linii oddzielaj¹cych sloty (tylko pomiedzy slotami)
+for s = 1:liczba_slotow-1
+    line([0.5 ilosc_dni*ilosc_rest + 0.5], ...
+        [s*ilosc_zestawow + 0.5 s*ilosc_zestawow + 0.5],...
+        'Color','black','LineWidth',3)
+end
 
-line([0.5 50.5], [10.5 10.5],'Color','black')
-line([0.5 50.5], [20.5 20.5],'Color','black')
-line([0.5 50.5], [30.5 30.5],'Color','black')
-
-%mapa(x_optym, liczba_dni);
+%mapa(x_optym, ilosc_dni);
