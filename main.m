@@ -72,7 +72,7 @@ while(iteracje < iteracje_lim )
                 %bo uwzgledniamy srodek otoczenia; 'kwadratowe' otoczenie
             srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
         
-            %wyznaczenie sasiadow
+            %wyznaczenie indeksow sasiadow
             %sasiednie restauracje
             neigh_r = ones(1, liczba_sasiadow) * r; %wszedzie wpisuje srodek otoczenia
             %sasiednie zestawy
@@ -107,7 +107,7 @@ while(iteracje < iteracje_lim )
                     neigh_k(i) = neigh_k(i) - ilosc_zestawow;
                 end
             end
-            %koniec wyznaczenia sasiadow
+            %koniec wyznaczenia indeksow sasiadow
             
             %sprawdzenie funkcji celu dla sasiadow
             for rest = 1:liczba_sasiadow
@@ -226,14 +226,14 @@ colorbar % wyswietlenie skali kolorystycznej
 title('mapa kolorow wezlow wybranych')
 % rysowanie linii oddzielaj¹cych dni (tylko pomiedzy dniami)
 for d = 1:ilosc_dni-1
-    line([ilosc_rest*d + 0.5 ilosc_rest*d + 0.5], ...
-        [ilosc_zestawow*liczba_slotow + 0.5 ilosc_zestawow*liczba_slotow + 0.5],...
+    line([ilosc_rest*d+0.5, ilosc_rest*d+0.5], ...
+        [0, ilosc_zestawow*liczba_slotow+0.5],...
         'Color','black','LineWidth',3)
 end
 % rysowanie linii oddzielaj¹cych sloty (tylko pomiedzy slotami)
 for s = 1:liczba_slotow-1
-    line([0.5 ilosc_dni*ilosc_rest + 0.5], ...
-        [s*ilosc_zestawow + 0.5 s*ilosc_zestawow + 0.5],...
+    line([0.5, ilosc_dni*ilosc_rest+0.5], ...
+        [s*ilosc_zestawow+0.5, s*ilosc_zestawow+0.5],...
         'Color','black','LineWidth',3)
 end
 
@@ -245,15 +245,15 @@ colorbar % wyswietlenie skali kolorystycznej
 title('mapa kolorow wezlow sasiednich')
 % rysowanie linii oddzielajacych dni (tylko pomiedzy dniami)
 for d = 1:ilosc_dni-1
-    line([ilosc_rest*d + 0.5 ilosc_rest*d + 0.5], ...
-        [ilosc_zestawow*liczba_slotow + 0.5 ilosc_zestawow*liczba_slotow + 0.5],...
+    line([ilosc_rest*d+0.5, ilosc_rest*d+0.5], ...
+        [0, ilosc_zestawow*liczba_slotow+0.5],...
         'Color','black','LineWidth',3)
 
 end
 % rysowanie linii oddzielaj¹cych sloty (tylko pomiedzy slotami)
 for s = 1:liczba_slotow-1
     line([0.5 ilosc_dni*ilosc_rest + 0.5], ...
-        [s*ilosc_zestawow + 0.5 s*ilosc_zestawow + 0.5],...
+        [s*ilosc_zestawow+0.5, s*ilosc_zestawow+0.5],...
         'Color','black','LineWidth',3)
 end
 
