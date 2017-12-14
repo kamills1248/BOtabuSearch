@@ -2,7 +2,7 @@ global R; global Z; global D; global poz_cz; global B; global S; global Ep;
 global E_max;
 
 %uniwersalne rozmiary macierzy
-global ilosc_zestawow; global ilosc_rest; 
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 % polozenie czlowieka 
 poz_bud = [  9, 3.5;
@@ -87,3 +87,7 @@ poz_cz = [   B1,     C1,     B1,     D8,     C3 ;  %przed slot 1 przed 10
              B1,     C1,     C2,     B1,     C2 ;  %po slot 1 przed 13
              C1,     D8,     B1,     B1,     C1 ;  %po slot 2 po 13
              C2,     B1,     C3,     B1,     B1];  %po slot 3 po 16:30
+         
+% licze ilosc dni
+size_poz_cz = size(poz_cz);
+ilosc_dni = size_poz_cz(2);

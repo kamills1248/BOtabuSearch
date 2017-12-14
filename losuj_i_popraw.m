@@ -3,12 +3,12 @@ global Bledy; %flagi dopuszczalnosci
 Bez_bledow = zeros(3,5,3);
 
 %uniwersalne rozmiary macierzy
-global ilosc_zestawow; global ilosc_rest;
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni
 
 %% Losujemy rozwiazanie poczatkowe
 rozw = zeros(3,10); % 3 sloty na dzien, 5 restauracji i 5 zestawow
 
-for dzien = 1:5
+for dzien = 1:ilosc_dni
     for slot = 1:3 
         % losowanie restauracji:
         rozw(slot, dzien*2-1) = randi([1 ilosc_rest], 1);
@@ -36,7 +36,7 @@ if (~isequal(Bledy, Bez_bledow))
     i = 0;
     while(~isequal(Bledy, Bez_bledow) && i < 20)
         % losowanie kolejnego rozwiazania:
-        for dzien = 1:5
+        for dzien = 1:ilosc_dni
             for slot = 1:3 
                 % losowanie restauracji:
                 rozw(slot, dzien*2-1) = randi([1 ilosc_rest], 1);

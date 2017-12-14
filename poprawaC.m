@@ -4,11 +4,11 @@ function [ rozwiazanie ] = poprawaC( rozwiazanie )
 global R; global Z; global S; global D; global poz_cz;
 global Bledy; %flagi dopuszczalnosci
 %uniwersalne rozmiary macierzy:
-global ilosc_zestawow; global ilosc_rest;
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 iter = 0;
             
-for dzien = 1:5
+for dzien = 1:ilosc_dni
     for slot = 1:3
         r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
         k = rozwiazanie(slot, dzien*2);  % k-ty zestaw

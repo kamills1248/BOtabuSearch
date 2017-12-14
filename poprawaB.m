@@ -5,14 +5,14 @@ global R;
 global Bledy; %flagi dopuszczalnosci
 
 %uniwersalne rozmiary macierzy:
-global ilosc_zestawow; global ilosc_rest;
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 iter = 0;
 
 % jesli budzet jest przekroczony, to szukamu najwiekszej ceny posilku
-if (~isequal(Bledy(:,:,1),zeros(3,5))) 
+if (~isequal(Bledy(:,:,1),zeros(3,ilosc_dni))) 
     cena=0;
-    for dzien = 1:5
+    for dzien = 1:ilosc_dni
         for slot = 1:3
             r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
             k = rozwiazanie(slot, dzien*2);  % k-ty zestaw
@@ -26,7 +26,7 @@ else
 end
          
             
-for dzien = 1:5
+for dzien = 1:ilosc_dni
     for slot = 1:3
         r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
         k = rozwiazanie(slot, dzien*2);  % k-ty zestaw

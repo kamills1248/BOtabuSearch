@@ -5,13 +5,13 @@ global R; global Z; global S; global D; global poz_cz;
 global Ep; global E_max;
 global Bledy; %flagi dopuszczalnosci
 %uniwersalne rozmiary macierzy:
-global ilosc_zestawow; global ilosc_rest;
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
 
 iter =0;
 
-for dzien = 1:5
+for dzien = 1:ilosc_dni
     energia = Ep - sp*przerwa(1); %danego dnia o 10, 2h po sniadaniu
     for slot = 1:3
         r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
