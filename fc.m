@@ -15,8 +15,8 @@ const3 = 0.005; %zadowolenie
 sp = 150; %spalanie w [kcal/h]
 przerwa = [2, 3, 3.5, 1.5]; %w [h]
 
-juz_jedlismy = ones(ilosc_zestawow) * 30; %30= ile razy maksymalnie jemy
-f  = 0;    % <- a co to? na co to komu potrzebne?
+juz_jedlismy = ones(ilosc_zestawow) * ilosc_dni*3; %ilosc_dni*3 (sloty) = ile razy maksymalnie jemy
+f  = 0; %do sumowania funkcji celu w kolejnych iteracjach; zerujemy przy wywolaniu fc
 zaplacone = 0;
 
 for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz dni
@@ -35,8 +35,6 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
         zaplacone = zaplacone + R(r,2*k+2);
         if(zaplacone > B)
            Bledy(slot, ceil(dzien/2), 1) = 1;
-%            f = inf;
-%            return;
         end
                     
         %czas
@@ -44,7 +42,6 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
         if(czas_zuzyty > S(slot,ceil(dzien/2)) + 15) %kwadrans akademicki
          %ceil bo po dniach idziemy co 2, a w macierzy poz_cz chcemy co 1
            Bledy(slot, ceil(dzien/2), 2) = 1;
-%            f = inf;
         end
                
         %energia: to co bylo - spalona + zjedzone
@@ -52,10 +49,8 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
         energia = energia - sp*przerwa(slot+1) + Z(1,k);
         if(energia < 0)
            Bledy(slot, ceil(dzien/2), 3) = -1;
-%            f = inf;
         elseif (energia > E_max)
            Bledy(slot, ceil(dzien/2), 3) = 1;
-%            f = inf;
         end
                 
         %f = f + czas(konsumpcja + przygotowanie + dojscie "*2") + cena 
@@ -66,4 +61,3 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
     end
 end
 end
-
