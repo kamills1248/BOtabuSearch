@@ -2,11 +2,12 @@ function [ f ] = fc( rozwiazanie)
 % Funkcja celu
 global R; global Z; global D; global poz_cz; global B; global S;
 global Ep; global E_max;
-global Bledy; %flagi dopuszczalnosci
-Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 
 %uniwersalne rozmiary macierzy
-global ilosc_zestawow; global ilosc_rest; 
+global ilosc_zestawow; global ilosc_rest; global ilosc_dni
+
+global Bledy; %flagi dopuszczalnosci
+Bledy = zeros(3, ilosc_dni, 3); %sloty, dni, flagi: budzet, czas, energia
 
 const1 = 100; %czas
 const2 = 200; %cena
@@ -18,7 +19,7 @@ juz_jedlismy = ones(ilosc_zestawow) * 30; %30= ile razy maksymalnie jemy
 f  = 0;    % <- a co to? na co to komu potrzebne?
 zaplacone = 0;
 
-for dzien=1:2:9 %idziemy 1,3,5,7,9; jest 10 kolumn
+for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz dni
     energia = Ep - sp*przerwa(1); %danego dnia o 10, 2h po sniadaniu
     
     for slot = 1:3
