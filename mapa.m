@@ -1,7 +1,7 @@
 function [  ] = mapa(rozwiazanie, liczba_dni)
 
 
-global poz_cz;
+global poz_cz; global S;
 
 % wczytuje plan
 plan = imread('map_agh.png');
@@ -43,6 +43,17 @@ nazwa_rest = {'Dagrasso  ';
               'Lemon     ';
               'Zaczek    ';
               'Barek     '};
+          
+nazwa_zestawu = {   'pizza            ';
+                    'makaron          ';
+                    'mieso & ziemniaki';
+                    'ryba & ryz       ';
+                    'kebab            ';
+                    'zupa             ';
+                    'burger           ';
+                    'zapiekanka       ';
+                    'pierogi          ';
+                    'precle/drozdzowka'};
              
 % petla po liczbie dni             
 for dzien=1:liczba_dni
@@ -80,11 +91,13 @@ for dzien=1:liczba_dni
     
     
     nr_rest = zeros(3,1);
+    nr_zestawu = zeros(3,1);
     %zaznaczam restauracje z macierzy rozwiazanie:
     for nr_slotu=1:3
         
         % pobieram nr restauracji z macierzy rozwiazanie:
         nr_rest(nr_slotu) = rozwiazanie(nr_slotu, dzien*2-1);
+        nr_zestawu(nr_slotu) = rozwiazanie(nr_slotu, dzien*2);
         
         % pobieram nowe wspolrzedne budynku z macierzy new_poz_rest:
         x_rest = new_poz_rest(nr_rest(nr_slotu), 1); 
@@ -106,22 +119,73 @@ for dzien=1:liczba_dni
         text(x_rest-4+(bylo*10), y_rest, num2str(2*nr_slotu));
     end
     
+    
+    % wyliczanie czasow zajec i posilkow
+    for i=1:3 % ide po liczbie slotow
+        mm = mod(S(i,dzien),60); % ile jest minut w slocie
+        hh = (S(i,dzien) - mm)/60; % ile jest godzin w slocie
+        
+        switch i
+            case 1 % godzina rozpoczecia zajec drugich
+                hh = hh + 10; %
+                if(mm < 10)
+                    % funkcja strcat() skleja stringi 
+                    godzina_zajec_2 = strcat(num2str(hh), ':0', num2str(mm));
+                else
+                    godzina_zajec_2 = strcat(num2str(hh), ':', num2str(mm));
+                end        
+            case 2 % godzina rozpoczecia zajec trzecich
+                hh = hh + 13;
+                if(mm < 10)
+                    godzina_zajec_3 = strcat(num2str(hh), ':0', num2str(mm));
+                else
+                    godzina_zajec_3 = strcat(num2str(hh), ':', num2str(mm));
+                end  
+            case 3 % godzina rozpoczecia zajec czwartych
+                hh = hh + 16;
+                mm = mm + 30; % tutaj dochodzi problem, bo nie liczymy od rownej godziny
+                if(mm >= 60) % a w tym if-ie rozwiazuje ten problem
+                    hh = hh + 1;
+                    mm = mm - 60;
+                end
+                if(mm < 10)
+                    godzina_zajec_4 = strcat(num2str(hh), ':0', num2str(mm));
+                else
+                    godzina_zajec_4 = strcat(num2str(hh), ':', num2str(mm));
+                end
+            otherwise
+                continue
+        end
+    end
+    
+    czas = {    '8:00 ';            % zajecia 1
+                '10:00';            % przerwa 1
+                godzina_zajec_2;    % zajecia 2
+                '13:00';            % przerwa 2
+                godzina_zajec_3;    % zajecia 3
+                '16:30';            % przerwa 3
+                godzina_zajec_4;    % zajecia 4
+                '18:00';};          % koniec zajec 4
+    
+    
     %legenda
     for i=1:(3+4)
         if(mod(i,2) ~= 0)
             nr_b = nr_budynku((i+1)/2);
             
-            %podzielilem to na dwukrotne wypisywanie tekstu, bo za cholere
+            %podzielilem to na trzykrotne wypisywanie tekstu, bo za cholere
             %nie chcialo dzialac jak bylo w jednej linijce:
-            text(10, 10+(i*20), [num2str(i) ': ']);
-            text(30, 10+(i*20), nazwa_budynku(nr_b));
+            text(10, 10+(i*20), czas(i));
+            text(40, 10+(i*20), ' - ');
+            text(50, 10+(i*20), nazwa_budynku(nr_b));
         else
             nr_r = nr_rest(i/2);
             
-            %podzielilem to na dwukrotne wypisywanie tekstu, bo za cholere
+            %podzielilem to na trzykrotne wypisywanie tekstu, bo za cholere
             %nie chcialo dzialac jak bylo w jednej linijce:
-            text(10, 10+(i*20), [num2str(i) ': ']);
-            text(30, 10+(i*20), nazwa_rest(nr_r));
+            text(10, 10+(i*20), czas(i));
+            text(40, 10+(i*20), ' - ');
+            text(50, 10+(i*20), strcat(nazwa_rest(nr_r), ' ', nazwa_zestawu(nr_r)));
         end
     
     end
