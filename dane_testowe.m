@@ -1,8 +1,17 @@
 global R; global Z; global D; global poz_cz; global B; global S; global Ep;
-global E_max; global poz_bud;
+global E_max; global poz_bud; global nazwa_budynku; global nazwa_rest;
+global nazwa_zestawu;
 
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
+
+
+% BUDYNKI
+nazwa_budynku = {   'B1';
+                    'C1';
+                    'C2';
+                    'C3';
+                    'D8'};
 
 % nowe wspolzedne budynkow na planie
 poz_bud = [ 618, 154;  %B1
@@ -13,6 +22,21 @@ poz_bud = [ 618, 154;  %B1
          
 B1 = 1; C1 = 2; C2 = 3; C3 = 4; D8 = 5;
 
+
+% RESTAURACJE
+% ponizej dwa wektory nazw, zwroccie uwage ze sa w nawiasach klamrowych 
+% { } oraz, ze kazdy element macierzy musi miec tyle samo znakow
+nazwa_rest = {'Dagrasso  ';
+              'Krakus    ';
+              'Tawo      ';
+              'Nawojka   ';
+              'Labirynt  ';
+              'PastaMasta';
+              'Kebab     ';
+              'Lemon     ';
+              'Zaczek    ';
+              'Barek     '};
+                
 %       x   y    ocena    c1    t1    c2    t2   c3   t3    c4    t4  
 r1 = [ 352,   93,   8,    25,   20,   16,   15, 1000, 100, 1000,  100;  %Dagrasso
        519,  260,   6,  1000,  100,    8,    2,   10,   3,   10,   3 ;  %Krakus
@@ -44,7 +68,20 @@ size_R = size(R);
 ilosc_rest = size_R(1);
 
 
-% zestawy
+% ZESTAWY
+% ponizej dwa wektory nazw, zwroccie uwage ze sa w nawiasach klamrowych 
+% { } oraz, ze kazdy element macierzy musi miec tyle samo znakow
+nazwa_zestawu = {   'pizza            ';
+                    'makaron          ';
+                    'mieso & ziemniaki';
+                    'ryba & ryz       ';
+                    'kebab            ';
+                    'zupa             ';
+                    'burger           ';
+                    'zapiekanka       ';
+                    'pierogi          ';
+                    'precle/drozdzowka'};
+
 %       z1     z2    z3    z4    z5    z6    z7    z8    z9   z10
 Z = [   600,  405,  800,  600,  820,  200,  400,  350,  650,  100  ;  %kcal
          20,   10,   13,   15,   10,    4,    8,    5,   10,    3  ;  %czas konsumpcji
@@ -58,22 +95,24 @@ ilosc_zestawow = size_Z(2);
 % budzet tygodniowy
 B = 120;
 
+
 % energia poczatkowa
 Ep = 700;
 
+
 % "pelnosc brzucha"
 E_max = 1000; %energia, ktora maksymalnie na raz mozna miec w sobie
+
 
 % sloty czasowe
 %      dz1     dz2     dz3     dz4     dz5
 S = [   30,     20,     25,     15,     30 ;  %slot 1 od 10
         45,     60,     90,     50,     60 ;  %slot 2 od 13
         15,     20,     15,     35,     15];  %slot 3 od 16:30
-     
+
+    
 % macierz odleglosci knajp od budynkow z zajeciami
 % restauracje \ budynki
-
-% wiersze to restauracje, kolumny, to budynki 
 D = [(abs(R(:,1) - poz_bud(1,1)) + abs(R(:,2) - poz_bud(1,2))),...
      (abs(R(:,1) - poz_bud(2,1)) + abs(R(:,2) - poz_bud(2,2))),...
      (abs(R(:,1) - poz_bud(3,1)) + abs(R(:,2) - poz_bud(3,2))),...
@@ -83,7 +122,8 @@ D = [(abs(R(:,1) - poz_bud(1,1)) + abs(R(:,2) - poz_bud(1,2))),...
 % dziele przez 60, poniewaz mapa ma rozmiar 360x900 a zalozylismy, ze
 % przejscie jej z zachodu na wschod zajmuje 15 minut, no i 900/15=60 
 D = D./60;
- 
+
+
 %  polozenie przed i po slocie
 %            dz1     dz2     dz3     dz4     dz5
 poz_cz = [   B1,     C1,     B1,     D8,     C3 ;  %przed slot 1 przed 10

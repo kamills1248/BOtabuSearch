@@ -1,59 +1,11 @@
 function [  ] = mapa(rozwiazanie, liczba_dni)
 
 
-global poz_cz; global S;
+global poz_cz; global S; global poz_bud; global R; global nazwa_budynku; 
+global nazwa_rest; global nazwa_zestawu;
 
 % wczytuje plan
 plan = imread('map_agh.png');
-
-% nowe wspolzedne budynkow na planie
-new_poz_bud = [ 618, 154;  %B1
-                795, 145;  %C1
-                763, 115;  %C2
-                723, 113;  %C3
-                190, 271]; %D8
-                 
-% nowe wspolzedne restauracji na planie
-new_poz_rest = [ 352,  93; %Dagrasso
-                 519, 260; %Krakus
-                 526, 217; %Tawo
-                 584, 277; %Nawojka
-                 616, 175; %Labirynt
-                 604,  47; %PastaMasta
-                 659,  51; %Kebab
-                 693,  99; %Lemon
-                 851, 352; %Zaczek
-                 779, 115]; %Barek
-
-% ponizej dwa wektory nazw, zwroccie uwage ze sa w nawiasach klamrowych "{
-% }" oraz, ze kazdy element macierzy musi miec tyle samo znakow
-nazwa_budynku = {   'B1';
-                    'C1';
-                    'C2';
-                    'C3';
-                    'D8'};
-                
-nazwa_rest = {'Dagrasso  ';
-              'Krakus    ';
-              'Tawo      ';
-              'Nawojka   ';
-              'Labirynt  ';
-              'PastaMasta';
-              'Kebab     ';
-              'Lemon     ';
-              'Zaczek    ';
-              'Barek     '};
-          
-nazwa_zestawu = {   'pizza            ';
-                    'makaron          ';
-                    'mieso & ziemniaki';
-                    'ryba & ryz       ';
-                    'kebab            ';
-                    'zupa             ';
-                    'burger           ';
-                    'zapiekanka       ';
-                    'pierogi          ';
-                    'precle/drozdzowka'};
              
 % petla po liczbie dni             
 for dzien=1:liczba_dni
@@ -69,9 +21,9 @@ for dzien=1:liczba_dni
         % pobieram nr budynku z macierzy poz_cz:
         nr_budynku(i) = poz_cz(i, dzien); 
         
-        % pobieram nowe wspolrzedne budynku z macierzy new_poz_bud:
-        x_budynku = new_poz_bud(nr_budynku(i), 1); 
-        y_budynku = new_poz_bud(nr_budynku(i), 2);
+        % pobieram wspolrzedne budynku z macierzy poz_bud:
+        x_budynku = poz_bud(nr_budynku(i), 1); 
+        y_budynku = poz_bud(nr_budynku(i), 2);
         
         % teraz sprawdzam, czy juz wczesniej pojawil sie ten budynek, bo jak
         % tak, to przypal, i trza cos z tym zrobic:
@@ -99,9 +51,9 @@ for dzien=1:liczba_dni
         nr_rest(nr_slotu) = rozwiazanie(nr_slotu, dzien*2-1);
         nr_zestawu(nr_slotu) = rozwiazanie(nr_slotu, dzien*2);
         
-        % pobieram nowe wspolrzedne budynku z macierzy new_poz_rest:
-        x_rest = new_poz_rest(nr_rest(nr_slotu), 1); 
-        y_rest = new_poz_rest(nr_rest(nr_slotu), 2);
+        % pobieram wspolrzedne budynku z macierzy R:
+        x_rest = R(nr_rest(nr_slotu), 1); 
+        y_rest = R(nr_rest(nr_slotu), 2);
         
         % teraz sprawdzam, czy juz wczesniej pojawila sie ta restauracja, 
         % bo jak tak, to przypal, i trza cos z tym zrobic:
