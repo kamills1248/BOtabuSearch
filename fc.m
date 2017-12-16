@@ -46,12 +46,16 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
                
         %energia: to co bylo - spalona + zjedzone
         %czy to co zjedlismy w danym slocie starczy do nastepnego posilku
-        energia = energia - sp*przerwa(slot+1) + Z(1,k);
-        if(energia < 0)
-           Bledy(slot, ceil(dzien/2), 3) = -1;
-        elseif (energia > E_max)
+        energia = energia + Z(1,k);
+        if (energia > E_max)
            Bledy(slot, ceil(dzien/2), 3) = 1;
         end
+        
+        energia = energia - sp*przerwa(slot+1);
+        if(energia < 0)
+           Bledy(slot, ceil(dzien/2), 3) = -1;
+        end
+        
                 
         %f = f + czas(konsumpcja + przygotowanie + dojscie "*2") + cena 
         % - zadowolenie(roznorodnosc * zestaw * restauracja * energetycznosc)
