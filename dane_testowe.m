@@ -80,7 +80,7 @@ nazwa_zestawu = {   'pizza            ';
                     'burger           ';
                     'zapiekanka       ';
                     'pierogi          ';
-                    'precle/drozdzowka'};
+                    'precel/drozdzowka'};
 
 %       z1     z2    z3    z4    z5    z6    z7    z8    z9   z10
 Z = [   600,  405,  800,  600,  820,  200,  400,  350,  650,  100  ;  %kcal

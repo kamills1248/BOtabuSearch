@@ -1,7 +1,7 @@
 clear all;
-% close all; !!!!!!!!!!!!!!!!!!!!!!!
-dane_testowe;
-
+close all; % !!!!!!!!!!!!!!!!!!!!!!!
+% dane_testowe;
+wczytaj_dane_z_pliku;
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
 global Bledy;
 %uniwersalne rozmiary macierzy:
