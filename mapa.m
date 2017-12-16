@@ -11,7 +11,7 @@ plan = imread('map_agh.png');
 for dzien=1:liczba_dni
     figure()
     imshow(plan);
-    title(['dzien nr ' num2str(dzien)]);
+    title(['Dzieñ nr ' num2str(dzien)]);
     hold on;
     
     nr_budynku = zeros(4,1);
@@ -143,4 +143,3 @@ for dzien=1:liczba_dni
     end
 end
 end
-

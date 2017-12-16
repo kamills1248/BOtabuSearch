@@ -201,29 +201,35 @@ while(iteracje < iteracje_lim )
     fc_wektor_optym(iteracje) = fc_optym;
 end
 
-% figure() %najlepszy sasiad
-% plot(fc_wektor_new)
-% title('Wartoœæ funkcji celu dla najlepszego s¹siada');
-% xlabel('Numer iteracji');
-% ylabel('Wartoœæ funkcji celu');
-% 
-% figure() %najlepszy sasiad z TL
-% plot(fc_wektor_new_tabu)
-% title('Wartoœæ funkcji celu dla najlepszego s¹siada z TL');
-% xlabel('Numer iteracji');
-% ylabel('Wartoœæ funkcji celu');
-% 
-% figure() %najlepszy dotad znaleziony
-% plot(fc_wektor_optym)
-% title('Wartoœæ funkcji celu dla najlepszego znalezionego wêz³a');
-% xlabel('Numer iteracji');
-% ylabel('Wartoœæ funkcji celu');
+figure() %fc najlepszych: sasiad, sasiad z TL i globalny
+% figure() %fc - najlepszy sasiad
+subplot(3,1,1)
+plot(fc_wektor_new)
+title('Wartoœæ funkcji celu dla najlepszego s¹siada');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
+
+subplot(3,1,2)
+% figure() %fc - najlepszy sasiad z TL
+plot(fc_wektor_new_tabu)
+title('Wartoœæ funkcji celu dla najlepszego s¹siada z TL');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
+
+subplot(3,1,3)
+% figure() %fc - najlepszy dotad znaleziony
+plot(fc_wektor_optym)
+title('Wartoœæ funkcji celu dla najlepszego znalezionego wêz³a');
+xlabel('Numer iteracji');
+ylabel('Wartoœæ funkcji celu');
 %%
-figure()
+figure() %histogram wezly wybrane i sasiednie
+subplot(2,1,1)
+% figure() %histogram wezly wybrane
 imagesc(mapa_kolorow); % "sc" na koncu image okresla wyskalowanie kolorow
 colormap(jet) % okreslenie kolorystyki 
 colorbar % wyswietlenie skali kolorystycznej 
-title('mapa kolorow wezlow wybranych')
+title('Histogram wêz³ów wybranych')
 % rysowanie linii oddzielaj¹cych dni (tylko pomiedzy dniami)
 for d = 1:ilosc_dni-1
     line([ilosc_rest*d+0.5, ilosc_rest*d+0.5], ...
@@ -237,12 +243,12 @@ for s = 1:liczba_slotow-1
         'Color','black','LineWidth',3)
 end
 
-
-figure()
+subplot(2,1,2)
+% figure() %histogram wezly sasiednie
 imagesc(mapa_kolorow_sasiedzi);  % "sc" na koncu image okresla wyskalowanie kolorow
 colormap(jet) % okreslenie kolorystyki 
 colorbar % wyswietlenie skali kolorystycznej
-title('mapa kolorow wezlow sasiednich')
+title('Histogram wêz³ów s¹siednich')
 % rysowanie linii oddzielajacych dni (tylko pomiedzy dniami)
 for d = 1:ilosc_dni-1
     line([ilosc_rest*d+0.5, ilosc_rest*d+0.5], ...
@@ -257,5 +263,6 @@ for s = 1:liczba_slotow-1
         'Color','black','LineWidth',3)
 end
 
-%mapa(x_optym, ilosc_dni);
+% mapa(x_optym, ilosc_dni);
 wyswietl_E_B_C( x_optym );
+ 

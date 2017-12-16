@@ -12,8 +12,8 @@ Bledy = zeros(3, ilosc_dni, 3); %sloty, dni, flagi: budzet, czas, energia
 const1 = 100; %czas
 const2 = 200; %cena
 const3 = 0.005; %zadowolenie
-sp = 150; %spalanie w [kcal/h]
-przerwa = [2, 3, 3.5, 1.5]; %w [h]
+sp = 150; %spalanie w [kcal/h] %uwaga podane tez w pliku wyswietl_E_B_C
+przerwa = [2, 3, 3.5, 1.5]; %w [h] %uwaga podane tez w pliku wyswietl_E_B_C
 
 juz_jedlismy = ones(ilosc_zestawow) * ilosc_dni*3; %ilosc_dni*3 (sloty) = ile razy maksymalnie jemy
 f  = 0; %do sumowania funkcji celu w kolejnych iteracjach; zerujemy przy wywolaniu fc

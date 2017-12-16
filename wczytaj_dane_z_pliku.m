@@ -50,16 +50,16 @@ ilosc_rest = size_R(1);
 % ZESTAWY
 % ponizej dwa wektory nazw, zwroccie uwage ze sa w nawiasach klamrowych 
 % { } oraz, ze kazdy element macierzy musi miec tyle samo znakow
-nazwa_zestawu = {   'pizza            ';
-                    'makaron          ';
-                    'mieso & ziemniaki';
-                    'ryba & ryz       ';
-                    'kebab            ';
-                    'zupa             ';
-                    'burger           ';
-                    'zapiekanka       ';
-                    'pierogi          ';
-                    'precel/drozdzowka'};
+nazwa_zestawu = {   'Pizza            ';
+                    'Makaron          ';
+                    'Miêso & ziemniaki';
+                    'Ryba & ry¿       ';
+                    'Kebab            ';
+                    'Zupa             ';
+                    'Burger           ';
+                    'Zapiekanka       ';
+                    'Pierogi          ';
+                    'Precel/dro¿d¿ówka'};
 
 
 % zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
@@ -72,7 +72,7 @@ ilosc_zestawow = size_Z(2);
 
 % SPRAWDZENIE WYMIAROW MACIERZY:
 if(((size_R(2) - 3)/2) > size_Z(2))
-   error('Error: W macierzy restauracji jest wiecej zestawow niz w macierzy zestawow');
+   error('Error: W macierzy restauracji jest wiêcej zestawów ni¿ w macierzy zestawów');
 end
 
 % budzet tygodniowy

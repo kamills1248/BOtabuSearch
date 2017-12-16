@@ -1,6 +1,6 @@
 global R; global Z; global D; global poz_cz; global B; global S; global Ep;
 global E_max; global poz_bud; global nazwa_budynku; global nazwa_rest;
-global nazwa_zestawu; global kwadrans_akademicki
+global nazwa_zestawu; global kwadrans_akademicki;
 
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;

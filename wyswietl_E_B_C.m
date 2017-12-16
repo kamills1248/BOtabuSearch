@@ -62,9 +62,9 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
     time = 1:600;
     plot(time,energia,time, maksimum);
     axis([0 600 0 E_max+200]);
-    title(['dzien ' num2str(ceil(dzien/2))]);
-    xlabel('czas [min]');
-    ylabel('energia [kcal]');
+    title(['Dzieñ ' num2str(ceil(dzien/2))]);
+    xlabel('Czas [min]');
+    ylabel('Energia [kcal]');
     
 end
 
@@ -76,9 +76,9 @@ i = i - 1; % robie to, zeby zgadzal sie rozmiar wektorow
 time = 1:i;
 plot(time,zaplacone,time, maksimum);
 axis([1 i 0 B+10]);
-title(['budzet w ciagu ' num2str(ilosc_dni) ' dni']);
-xlabel('sloty w dniach');
-ylabel('wynane pieniadze [zl]');
+title(['Bud¿et w ci¹gu ' num2str(ilosc_dni) ' dni']);
+xlabel('Sloty w dniach');
+ylabel('Wydane pieni¹dze [zl]');
 
 
 % rysowanie wykresu czasu w slotach 
@@ -86,10 +86,9 @@ subplot(1,2,2)
 time = 1:i;
 plot(time,czas_zuzyty,'o',time, gorne_ograniczenie_czasu, 'o');
 axis([0.5 (i+0.5) 0 (max(gorne_ograniczenie_czasu)+20)]);
-title(['czas w przerwach w ciagu ' num2str(ilosc_dni) ' dni']);
-xlabel('sloty w dniach');
-ylabel('czas [min]');
-legend('czas zuzyty na jedzenie', 'czasowy limit slotu');
+title(['Czas w przerwach w ci¹gu ' num2str(ilosc_dni) ' dni']);
+xlabel('Sloty w dniach');
+ylabel('Czas [min]');
+legend('Czas zu¿yty na jedzenie', 'Czasowy limit slotu');
 
 end
-

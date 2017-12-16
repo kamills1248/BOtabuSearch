@@ -2,7 +2,7 @@ function [ rozwiazanie ] = poprawaE( rozwiazanie )
 %POPRAWA E - poprawa energii w rozwiazaniu 
 
 global R; global Z; global S; global D; global poz_cz;
-global Ep; global E_max;
+global Ep; global E_max; global kwadrans_akademicki;
 global Bledy; %flagi dopuszczalnosci
 %uniwersalne rozmiary macierzy:
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
@@ -26,8 +26,10 @@ for dzien = 1:ilosc_dni
         energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
         if(Bledy(slot,dzien,3) ~= 0) 
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po powyuzszych zmianach
-            i=0; j=0;
-            while(((energia_przed + Z(1,k))> E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) && iter < 50)
+%             i=0; j=0; % jesli te ify sa zakomentowane to nie uzywamy tego
+            while(((energia_przed + Z(1,k))> E_max || energia < 0 || ...
+                  czas_zuzyty > (S(slot,ceil(dzien/2)) + kwadrans_akademicki) || ...
+                  R(r,2*k+2) > cena_s) && iter < 50)
                 %dopoki energia sie nie zgadza i czas i cena beda rowne lub mniejsze poprzednim
                 
 %                 if( i <= ilosc_zestawow)
