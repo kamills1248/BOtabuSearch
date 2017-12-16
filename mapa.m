@@ -1,14 +1,14 @@
-function [  ] = mapa(rozwiazanie, liczba_dni)
+function [  ] = mapa(rozwiazanie)
 
 
 global poz_cz; global S; global poz_bud; global R; global nazwa_budynku; 
-global nazwa_rest; global nazwa_zestawu;
+global nazwa_rest; global nazwa_zestawu; global ilosc_dni;
 
 % wczytuje plan
 plan = imread('map_agh.png');
              
 % petla po liczbie dni             
-for dzien=1:liczba_dni
+for dzien=1:ilosc_dni
     figure()
     imshow(plan);
     title(['Dzieñ nr ' num2str(dzien)]);
