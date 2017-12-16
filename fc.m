@@ -1,7 +1,7 @@
 function [ f ] = fc( rozwiazanie)
 % Funkcja celu
 global R; global Z; global D; global poz_cz; global B; global S;
-global Ep; global E_max;
+global Ep; global E_max; global kwadrans_akademicki;
 
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni
@@ -39,7 +39,7 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
                     
         %czas
         czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
-        if(czas_zuzyty > S(slot,ceil(dzien/2)) + 15) %kwadrans akademicki
+        if(czas_zuzyty > S(slot,ceil(dzien/2)) + kwadrans_akademicki) %kwadrans akademicki
          %ceil bo po dniach idziemy co 2, a w macierzy poz_cz chcemy co 1
            Bledy(slot, ceil(dzien/2), 2) = 1;
         end

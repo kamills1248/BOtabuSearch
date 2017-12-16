@@ -1,6 +1,6 @@
 global R; global Z; global D; global poz_cz; global B; global S; global Ep;
 global E_max; global poz_bud; global nazwa_budynku; global nazwa_rest;
-global nazwa_zestawu;
+global nazwa_zestawu; global kwadrans_akademicki
 
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
@@ -110,6 +110,8 @@ S = [   30,     20,     25,     15,     30 ;  %slot 1 od 10
         45,     60,     90,     50,     60 ;  %slot 2 od 13
         15,     20,     15,     35,     15];  %slot 3 od 16:30
 
+kwadrans_akademicki = 15;
+    
     
 % macierz odleglosci knajp od budynkow z zajeciami
 % restauracje \ budynki

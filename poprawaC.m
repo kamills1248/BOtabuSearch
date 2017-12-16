@@ -1,7 +1,7 @@
 function [ rozwiazanie ] = poprawaC( rozwiazanie )
 %POPRAWA C - poprawa czasu w rozwiazaniu
 
-global R; global Z; global S; global D; global poz_cz;
+global R; global Z; global S; global D; global poz_cz; global kwadrans_akademicki;
 global Bledy; %flagi dopuszczalnosci
 %uniwersalne rozmiary macierzy:
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
@@ -20,7 +20,7 @@ for dzien = 1:ilosc_dni
         czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
         if(Bledy(slot,dzien,2) ~= 0) 
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po zmianach w budzecie
-            while((czas_zuzyty >= (S(slot,dzien) + 15) || R(r,2*k+2) >= cena_s) && iter < 10) 
+            while((czas_zuzyty >= (S(slot,dzien) + kwadrans_akademicki) || R(r,2*k+2) >= cena_s) && iter < 10) 
                 %dopoki czas sie nie zmniejszy i cena bedzie taka jak byla lub mniejsza
                 rozwiazanie(slot,dzien*2-1)= randi([1 ilosc_rest], 1);
                 rozwiazanie(slot,dzien*2)= randi([1 ilosc_zestawow], 1);

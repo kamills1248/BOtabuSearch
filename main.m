@@ -258,3 +258,4 @@ for s = 1:liczba_slotow-1
 end
 
 %mapa(x_optym, ilosc_dni);
+wyswietl_E_B_C( x_optym );
