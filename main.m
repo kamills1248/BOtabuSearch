@@ -1,5 +1,9 @@
+if (exist('summary')) %sprawdza czy to nie pierwszy przebieg gdy nie ma okna
+    delete(summary); %zamyka msgbox z podsumowaniem dzialania algorytmu
+end
 clear all;
 close all; % !!!!!!!!!!!!!!!!!!!!!!!
+
 % dane_testowe;
 wczytaj_dane_z_pliku;
 %flagi dopuszczalnosci rozwiazania; 1 gdy niedopuszczalne
@@ -35,6 +39,7 @@ liczba_slotow = x_size(1); %liczba slotow w danej instancji; zakladamy = 3
 
 TL = zeros(x_size); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
+CAcount = 0; %liczba zadzialan kryterium aspiracji (Aspiration Criteria)
 
 iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; %liczba iteracji bez poprawy wartosci fc_optym
@@ -162,12 +167,13 @@ while(iteracje < iteracje_lim )
             fc_optym = fc_new;
             iter_bez_poprawy = 0; % jest poprawa
         end
-        % Kryterium aspiracji dla rozwiazania z TL
+        % Kryterium aspiracji (CA) dla rozwiazania z TL
         if (fc_new_tabu < fc_optym) %(wazna silna nierownosc!)
             x_optym = x_new_tabu;
             fc_optym = fc_new_tabu;
             iter_bez_poprawy = 0; % jest poprawa
             x_new = x_new_tabu; % zeby moc latwo skorygowac TL
+            CAcount = CAcount + 1; %licznik zadzialan kryterium aspiracji
         end
 
         % KOREKTA LISTY TABU
@@ -265,4 +271,14 @@ end
 
 % mapa(x_optym, ilosc_dni);
 wyswietl_E_B_C( x_optym );
- 
+
+%%
+% Podsumowanie przebiegu algorytmu - mozna dodawac kolejne rzeczy
+% w nawiasach klamrowych przecinkami oddzielone kolejne linie, drugi
+% argument msgbox to tytul okienka
+summary = msgbox({sprintf('Liczba iteracji = %d', iteracje_lim), ...
+    sprintf('Najlepsza wartoœæ funkcji celu = %d', fc_optym), ...    
+    sprintf('Liczba zadzia³añ kryterium aspiracji = %d', CAcount),}, ...
+    'Podsumowanie przebiegu algorytmu');
+set(summary, 'position', [100 400 500 100]); % makes box bigger
+    %odleglosc od: lewej strony ekranu, dolu, rozmiar x, rozmiar y
