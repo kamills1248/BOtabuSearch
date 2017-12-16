@@ -40,7 +40,8 @@ nazwa_rest = {'Dagrasso  ';
 % macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze to polozenie (x,y), trzecia
 % to ocena restauracji (1-10), nastêpne to parami zestawy (cena i czas
 % wykonania)
-load R.txt -ascii        
+load R_2.txt -ascii   
+R=R_2;
 
 % licze ilosc restauracji
 size_R = size(R);
@@ -63,7 +64,8 @@ nazwa_zestawu = {   'Pizza            ';
 
 
 % zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
-load Z.txt -ascii  
+load Z_2.txt -ascii  
+Z=Z_2;
 
 % licze ilosc zestawow
 size_Z = size(Z);
