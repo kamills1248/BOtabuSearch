@@ -26,8 +26,25 @@ for dzien = 1:ilosc_dni
         energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
         if(Bledy(slot,dzien,3) ~= 0) 
             %jezeli w tablicy bledow byl tutaj blad i nadal jest po powyuzszych zmianach
-            while((energia > E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) && iter < 10)
+            i=0; j=0;
+            while(((energia_przed + Z(1,k))> E_max || energia < 0 || czas_zuzyty > (S(slot,ceil(dzien/2)) + 15) || R(r,2*k+2) > cena_s) && iter < 50)
                 %dopoki energia sie nie zgadza i czas i cena beda rowne lub mniejsze poprzednim
+                
+%                 if( i <= ilosc_zestawow)
+%                     rozwiazanie(slot,dzien*2)= + 1;
+%                     if(rozwiazanie(slot,dzien*2) > ilosc_zestawow)
+%                         rozwiazanie(slot,dzien*2) = 1;
+%                     end
+%                     i = i+1;
+%                 end
+%                 if( i> ilosc_zestawow && j <= ilosc_rest)
+%                     rozwiazanie(slot,dzien*2-1)= + 1;
+%                     if(rozwiazanie(slot,dzien*2-1) > ilosc_rest)
+%                         rozwiazanie(slot,dzien*2-1) = 1;
+%                     end
+%                     i=0;
+%                     j = j+1;
+%                 end
                 rozwiazanie(slot,dzien*2-1)= randi([1 ilosc_rest], 1);
                 rozwiazanie(slot,dzien*2)= randi([1 ilosc_zestawow], 1);
                 r = rozwiazanie(slot, dzien*2-1);   % r-ta restauracja
@@ -35,7 +52,7 @@ for dzien = 1:ilosc_dni
                 do_rest = D(r,poz_cz(slot,dzien)); % czas dojscia do restauracji
                 od_rest = D(r,poz_cz(slot + 1,dzien)); % czas dojscia na zajecia potem
                 czas_zuzyty = Z(2,k)+ R(r,2*k+3) + do_rest + od_rest;
-                energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
+                %energia = energia_przed - sp*przerwa(slot+1) + Z(1,k);
                 iter = iter + 1;
              end    
          end
