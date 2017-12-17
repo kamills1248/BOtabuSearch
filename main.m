@@ -70,7 +70,10 @@ while(iteracje < iteracje_lim )
             r = x_wezel(slot, dzien*2-1);   % r-ta restauracja
             k = x_wezel(slot, dzien*2);  % k-ty zestaw
             
-            mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) = mapa_kolorow((slot-1)*10+k,(dzien-1)*10+r) + 1; % dodajemy 1 do mapy kolorow rozwiazania
+            % dodajemy 1 do mapy kolorow rozwiazania
+            mapa_kolorow((slot-1)*ilosc_zestawow+k,(dzien-1)*ilosc_rest+r) =...
+                mapa_kolorow((slot-1)*ilosc_zestawow+k,(dzien-1)*ilosc_rest+r) + 1; 
+            
               
             %zadajemy liczbe sasiadow
             liczba_sasiadow = 5; %liczba sasiadow w wierszu i kolumnie + 1 
@@ -117,8 +120,8 @@ while(iteracje < iteracje_lim )
             %sprawdzenie funkcji celu dla sasiadow
             for rest = 1:liczba_sasiadow
                 for zestaw = 1:liczba_sasiadow
-                    mapa_kolorow_sasiedzi((slot-1)*10+neigh_k(zestaw),(dzien-1)*10+neigh_r(rest)) =...
-                        mapa_kolorow_sasiedzi((slot-1)*10+neigh_k(zestaw),(dzien-1)*10+neigh_r(rest)) + 1;
+                    mapa_kolorow_sasiedzi((slot-1)*ilosc_zestawow+neigh_k(zestaw),(dzien-1)*ilosc_rest+neigh_r(rest)) =...
+                        mapa_kolorow_sasiedzi((slot-1)*ilosc_zestawow+neigh_k(zestaw),(dzien-1)*ilosc_rest+neigh_r(rest)) + 1;
                     
                     if(rest == srodek_otoczenia && zestaw == srodek_otoczenia) 
                        continue; %srodek otoczenia - to nie sasiad
