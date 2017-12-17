@@ -6,7 +6,7 @@ global Ep; global E_max; global kwadrans_akademicki;
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni
 
-global Bledy; %flagi dopuszczalnosci
+global Bledy; %flagi dopuszczalnosci: 3 sloty, 5 dni, 3 rodzaje bledow
 Bledy = zeros(3, ilosc_dni, 3); %sloty, dni, flagi: budzet, czas, energia
 
 const1 = 100; %czas

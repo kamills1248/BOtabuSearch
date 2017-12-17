@@ -13,7 +13,7 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni
 
 % Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 % inicjowane przy pierwszym przebiegu fc
-Bez_bledow = zeros(3,5,3);
+Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, 5 dni, 3 rodzaje bledow
 x_zeros = zeros(3,10);
 
 %% Losujemy rozwiazanie poczatkowe i poprawiamy je
@@ -23,8 +23,8 @@ x_zeros = zeros(3,10);
 
 
 %% Przykladowe zapisane rozwiazanie, zeby potestowac parametry
-load przykladowe_poczatkowe_rozw;
-x_wezel = przykladowe;
+% load przykladowe_poczatkowe_rozw;
+% x_wezel = przykladowe;
 fc_wezel = fc(x_wezel);
 
 %% Glowny algorytm
