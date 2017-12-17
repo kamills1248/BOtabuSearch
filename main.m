@@ -25,7 +25,7 @@ x_zeros = zeros(3,10);
 %% Przykladowe zapisane rozwiazanie, zeby potestowac parametry
 % load przykladowe_poczatkowe_rozw;
 % x_wezel = przykladowe;
-fc_wezel = fc(x_wezel);
+% fc_wezel = fc(x_wezel);
 
 %% Glowny algorytm
 x_optym = x_wezel; % najlepsze dotad znalezione rozwiazanie (dopuszczalne)
