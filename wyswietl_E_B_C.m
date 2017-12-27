@@ -19,6 +19,10 @@ czas_zuzyty = zeros(3*ilosc_dni, 1);
 gorne_ograniczenie_czasu = zeros(3*ilosc_dni, 1); % porzebne do rysowania max czasu slotu
 i = 1; % ta zmienna przydaje sie dalej do wektora zaplacone i zuzyty_czas
 
+srednia_energia = 0;
+sredni_budzet = 0;
+sredni_czas = 0;
+
 figure() % do rysowania wykresow energii
 
 for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz dni
@@ -57,7 +61,11 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
     end
     
     % zaczyna sie rysowanie energii na wykesie
-    subplot(ceil(ilosc_dni/2),2,ceil(dzien/2));
+    if(mod(ilosc_dni,2)==1) % to mi sie przydaje potem do wypisywania sredniej
+        subplot(ceil(ilosc_dni/2),2,ceil(dzien/2));
+    else
+        subplot(ceil(ilosc_dni/2)+1,2,ceil(dzien/2));
+    end
     maksimum = ones(600)*E_max; % robie to zeby narysowac ten max limit energii
     time = 1:600;
     plot(time,energia,time, maksimum);
@@ -66,11 +74,32 @@ for dzien=1:2:(2*ilosc_dni - 1) %idziemy 1,3,5,7,9...; bo jest wiecej kolum niz 
     xlabel('Czas [min]');
     ylabel('Energia [kcal]');
     
+    % do liczenia sredniej
+    srednia_E_dnia = sum(energia)/600;
+    srednia_energia = srednia_energia + srednia_E_dnia;
+    
 end
+
+% wyliczenie sredniej energii w tygodniu:
+srednia_energia = srednia_energia/ilosc_dni;
+
+% wypisanie œredniej energi na subplocie:
+if(mod(ilosc_dni,2)==1) % ten if jest po to, aby ladnie sie wypisalo w odpowiednim oknie
+    subplot(ceil(ilosc_dni/2),2,ilosc_dni+1);
+    text(0,1,'sredni poziom energii w ciagu'); 
+    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
+    axis off;
+else
+    subplot(ceil(ilosc_dni/2)+1,2,ilosc_dni+1);
+    text(0,1,'sredni poziom energii w ciagu'); 
+    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
+    axis off;
+end
+
 
 % rysowanie wykresu budzetu
 figure()
-subplot(1,2,1)
+subplot(2,2,1)
 maksimum = ones(3*ilosc_dni)*B; % robie to zeby narysowac ten max limit budzetu
 i = i - 1; % robie to, zeby zgadzal sie rozmiar wektorow
 time = 1:i;
@@ -82,7 +111,7 @@ ylabel('Wydane pieni¹dze [zl]');
 
 
 % rysowanie wykresu czasu w slotach 
-subplot(1,2,2)
+subplot(2,2,2)
 time = 1:i;
 plot(time,czas_zuzyty,'o',time, gorne_ograniczenie_czasu, 'o');
 axis([0.5 (i+0.5) 0 (max(gorne_ograniczenie_czasu)+20)]);
@@ -90,5 +119,36 @@ title(['Czas w przerwach w ci¹gu ' num2str(ilosc_dni) ' dni']);
 xlabel('Sloty w dniach');
 ylabel('Czas [min]');
 legend('Czas zu¿yty na jedzenie', 'Czasowy limit slotu');
+
+grid on
+grid minor
+
+% % rysowanie linii pionowych
+% for d = 1:(ilosc_dni*3)
+%     line([d, d], ...
+%         [0, max(gorne_ograniczenie_czasu)+20],...
+%         'Color','black','LineWidth',1);
+% end
+
+
+% wyliczenie sredniego budzetu:
+sredni_budzet = zaplacone(i)/ilosc_dni;
+
+% wypisanie sredniego budzetu:
+subplot(2,2,3)
+text(0,1,'srednio wydane zostalo ');
+text(0,0.9,[ num2str(sredni_budzet) ' zl na dzien']);
+axis off;
+
+
+% wyliczenie sredniego zuzytego czasu:
+sredni_czas = sum(czas_zuzyty)/i;
+
+% wypisanie sredniego zuzytego:
+subplot(2,2,4)
+text(0,1,'srednio wykorzystalismy ');
+text(0,0.9,[num2str(sredni_czas) ' minut na jeden slot']);
+axis off;
+
 
 end
