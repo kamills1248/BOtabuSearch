@@ -210,6 +210,9 @@ while(iteracje < iteracje_lim )
     fc_wektor_optym(iteracje) = fc_optym;
 end
 
+%% WIZUALIZACJA OTRZYMANYCH WYNIKOW
+set(0,'defaultfigurecolor',[1 1 1]); %ustawia tlo figur na biale
+
 figure() %fc najlepszych: sasiad, sasiad z TL i globalny
 % figure() %fc - najlepszy sasiad
 subplot(3,1,1)
