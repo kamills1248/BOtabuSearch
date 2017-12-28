@@ -5,6 +5,12 @@ global nazwa_zestawu; global kwadrans_akademicki
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
+load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
+load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
+load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
+load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
+
+
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
@@ -40,7 +46,7 @@ nazwa_rest = {'Dagrasso  ';
 % macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze to polozenie (x,y), trzecia
 % to ocena restauracji (1-10), nastêpne to parami zestawy (cena i czas
 % wykonania)
-load R.txt -ascii   
+% load R.txt -ascii   
 % R=R_2; % dla pliku R_2.txt
 
 % licze ilosc restauracji
@@ -64,7 +70,7 @@ nazwa_zestawu = {   'Pizza            ';
 
 
 % zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
-load Z.txt -ascii  
+% load Z.txt -ascii  
 % Z=Z_2; % dla pliku Z_2.txt
 
 % licze ilosc zestawow
@@ -90,7 +96,7 @@ E_max = 1000; %energia, ktora maksymalnie na raz mozna miec w sobie
 
 % sloty czasowe - dlogosci (kolumny: kolejne dni, wiersze: sloty kolejno: 
 % slot 1 od 10, slot 2 od 13, slot 3 od 16:30)
-load S.txt -ascii
+% load S.txt -ascii
     
 kwadrans_akademicki = 15;
     
