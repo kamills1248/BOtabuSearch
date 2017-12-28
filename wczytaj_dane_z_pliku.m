@@ -5,12 +5,25 @@ global nazwa_zestawu; global kwadrans_akademicki
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
+% DANE RZECZYWISTE
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
 
+% Rest = 4, Zest = 7, Dni = 5
+% load testy\dane_testowe_r4_z7_d5\R_4.txt -ascii
+% load testy\dane_testowe_r4_z7_d5\Z_7.txt -ascii
+% load testy\dane_testowe_r4_z7_d5\S.txt -ascii
+% load testy\dane_testowe_r4_z7_d5\poz_cz.txt -ascii
+% R = R_4; Z = Z_7;
 
+% Rest = 4, Zest = 7, Dni = 5; BEZ '1000' w R
+% load testy\dane_testowe_r4_z7_d5_bez_1000\R_4_bez_1000.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\Z_7.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\S.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\poz_cz.txt -ascii
+% R = R_4_bez_1000; Z = Z_7;
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
