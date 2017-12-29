@@ -47,6 +47,7 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 % R = R_1; Z = Z_1;
 
 % Rest = 10, Zest = 10, Dni = 10
+% Pamietac, zeby zwiekszyc budzet!
 load testy\dane_testowe_r10_z10_d10\R.txt -ascii
 load testy\dane_testowe_r10_z10_d10\Z.txt -ascii
 load testy\dane_testowe_r10_z10_d10\S_d10.txt -ascii
@@ -114,8 +115,8 @@ if(((size_R(2) - 3)/2) > size_Z(2))
 end
 
 % budzet tygodniowy
-B = 120;
-
+% B = 120;
+B = 240; %budzet na 10 dni
 
 % energia poczatkowa
 Ep = 700;
