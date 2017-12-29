@@ -1,4 +1,7 @@
-% To wrzucamy do odpowiedniego katalogu z testami
+% Instrukcja uzycia:
+% Przed wykonaniem testu w linijce 22 i 63 zmienic sciezke do odpowiedniego
+% katalogu! (po 'testy\' a przed nazwa pliku wpisac katalog testu)
+
 % przed uruchomieniem wykomentowac w main wyswietlanie wszystkich wynikow
 clear all;
 close all; 
@@ -19,7 +22,7 @@ while(licznik <= LIMIT)
     % nie inkrementuje)
     size_warn = size(lastwarn);
     if(size_warn(2) == 0 && size_warn(1) == 0)
-        nazwa = strcat(num2str(licznik), '.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
+        nazwa = strcat('testy\',num2str(licznik), '.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
         save(nazwa);
         
         wyniki(licznik, 1) = licznik; % numer workspace'a
@@ -60,7 +63,7 @@ sr_C_odchy = std(wyniki(:,6));
 % mape
 
 % Na wszelki wypadek wyniki testu te¿ zapisujemy do pliku .mat
-save('wyniki_testu.mat','wyniki','Min','Nr_best_workspace','Max','Nr_worst_workspace',...
+save('testy\wyniki_testu.mat','wyniki','Min','Nr_best_workspace','Max','Nr_worst_workspace',...
     'fc_optym_sr','fc_optym_odchy','CAcount_sr','CAcount_odchy','sr_E_sr','sr_E_odchy',...
     'sr_B_sr','sr_B_odchy','sr_C_sr','sr_C_odchy');
 
