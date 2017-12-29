@@ -1,7 +1,3 @@
-if (exist('summary')) %sprawdza czy to nie pierwszy przebieg gdy nie ma okna
-    delete(summary); %zamyka msgbox z podsumowaniem dzialania algorytmu
-end
-
 clear all;
 close all; 
 
@@ -13,14 +9,15 @@ licznik = 1;
 while(licznik <= 3) 
 %   UWAGA! w main nie moze byc clear all, bo usuwa licznik!!!!!!!!!!!!!!!!!
     main;
+    % tu ponizej sprawdzamy czy wykonal sie warning, jesli tak, to
+    % pomijamy to rozwiazanie i jeszcze raz uruchamiamy main (licznik sie
+    % nie inkrementuje)
     size_warn = size(lastwarn);
-    lastwarn;
     if(size_warn(2) == 0 && size_warn(1) == 0)
         nazwa = strcat(num2str(licznik), '.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
         save(nazwa);
 
         licznik = licznik + 1;
-
     end
     lastwarn('');
 %   na wszelki wypadek usuwam te dane zapisane tu
