@@ -88,43 +88,27 @@ end
 % wyliczenie sredniej energii w tygodniu:
 srednia_energia = srednia_energia/ilosc_dni;
 
-
-% wypisanie œredniej energi na subplocie:
-if(mod(ilosc_dni,2)==1) % ten if jest po to, aby ladnie sie wypisalo w odpowiednim oknie
-    subplot(ceil(ilosc_dni/2),2,ilosc_dni+1);
-    text(0,1,'œredni poziom energii w ci¹gu'); 
-    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
-    axis off;
-else
-    subplot(ceil(ilosc_dni/2)+1,2,ilosc_dni+1);
-    text(0,1,'œredni poziom energii w ci¹gu'); 
-    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
-    axis off;
-end
-
-
-
 if(rysuj == 1)
     % wypisanie œredniej energi na subplocie:
     if(mod(ilosc_dni,2)==1) % ten if jest po to, aby ladnie sie wypisalo w odpowiednim oknie
         subplot(ceil(ilosc_dni/2),2,ilosc_dni+1);
-        text(0,1,'sredni poziom energii w ciagu'); 
+        text(0,1,'œredni poziom energii w ci¹gu'); 
         text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
         axis off;
     else
         subplot(ceil(ilosc_dni/2)+1,2,ilosc_dni+1);
-        text(0,1,'sredni poziom energii w ciagu'); 
+        text(0,1,'œredni poziom energii w ci¹gu'); 
         text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
         axis off;
     end
 end
     
+i = i - 1; % robie to, zeby zgadzal sie rozmiar wektorow
 if(rysuj == 1)
     % rysowanie wykresu budzetu
     figure()
     subplot(2,2,1)
     maksimum = ones(3*ilosc_dni)*B; % robie to zeby narysowac ten max limit budzetu
-    i = i - 1; % robie to, zeby zgadzal sie rozmiar wektorow
     time = 1:i;
     plot(time,zaplacone,time, maksimum);
     axis([1 i 0 B+10]);
@@ -151,37 +135,21 @@ end
 % wyliczenie sredniego budzetu:
 sredni_budzet = zaplacone(i)/ilosc_dni;
 
-
 % wyliczenie sredniego zuzytego czasu:
 sredni_czas = sum(czas_zuzyty)/i;
 
 
-% wypisanie sredniego budzetu:
-subplot(2,2,3)
-text(0,1,'œrednio wydane zosta³o ');
-text(0,0.9,[ num2str(sredni_budzet) ' z³ na dzieñ']);
-axis off;
-
-
-% wyliczenie sredniego zuzytego czasu:
-sredni_czas = sum(czas_zuzyty)/i;
-
-% wypisanie sredniego zuzytego:
-subplot(2,2,4)
-text(0,1,'œrednio wykorzystaliœmy ');
-text(0,0.9,[num2str(sredni_czas) ' minut na jeden slot']);
-axis off;
-
+    
 if(rysuj == 1)
     % wypisanie sredniego budzetu:
     subplot(2,2,3)
-    text(0,1,'srednio wydane zostalo ');
-    text(0,0.9,[ num2str(sredni_budzet) ' zl na dzien']);
+    text(0,1,'œrednio wydane zosta³o ');
+    text(0,0.9,[ num2str(sredni_budzet) ' z³ na dzieñ']);
     axis off;
 
     % wypisanie sredniego zuzytego:
     subplot(2,2,4)
-    text(0,1,'srednio wykorzystalismy ');
+    text(0,1,'œrednio wykorzystaliœmy ');
     text(0,0.9,[num2str(sredni_czas) ' minut na jeden slot']);
     axis off;
 end
