@@ -5,6 +5,20 @@ global nazwa_zestawu; global kwadrans_akademicki
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
+% WCZYTYWANE DANE:
+% macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze 
+% to polozenie (x,y), trzecia to ocena restauracji (1-10), nastepne to 
+% parami zestawy (cena i czas wykonania)
+
+% zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
+
+% sloty czasowe - dlugosci (kolumny: kolejne dni, wiersze: sloty kolejno: 
+% slot 1 od 10, slot 2 od 13, slot 3 od 16:30)
+
+% polozenie czlowieka przed i po slocie (kolumny: kolejne dni, wiersze:
+% polozenie kolejno: przed slot 1 przed 10, po slot 1 przed 13, po slot 2
+% po 13, po slot 3 po 16:30)
+
 % DANE RZECZYWISTE
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
 load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
@@ -24,20 +38,6 @@ load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
 % load testy\dane_testowe_r4_z7_d5_bez_1000\S.txt -ascii
 % load testy\dane_testowe_r4_z7_d5_bez_1000\poz_cz.txt -ascii
 % R = R_4_bez_1000; Z = Z_7;
-
-% WCZYTYWANE DANE:
-% macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze 
-% to polozenie (x,y), trzecia to ocena restauracji (1-10), nastepne to 
-% parami zestawy (cena i czas wykonania)
-
-% zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
-
-% sloty czasowe - dlogosci (kolumny: kolejne dni, wiersze: sloty kolejno: 
-% slot 1 od 10, slot 2 od 13, slot 3 od 16:30)
-
-% polozenie czlowieka przed i po slocie (kolumny: kolejne dni, wiersze:
-% polozenie kolejno: przed slot 1 przed 10, po slot 1 przed 13, po slot 2
-% po 13, po slot 3 po 16:30)
 
 
 % BUDYNKI
