@@ -5,11 +5,25 @@ global nazwa_zestawu; global kwadrans_akademicki
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
+% WCZYTYWANE DANE:
+% macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze 
+% to polozenie (x,y), trzecia to ocena restauracji (1-10), nastepne to 
+% parami zestawy (cena i czas wykonania)
+
+% zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
+
+% sloty czasowe - dlugosci (kolumny: kolejne dni, wiersze: sloty kolejno: 
+% slot 1 od 10, slot 2 od 13, slot 3 od 16:30)
+
+% polozenie czlowieka przed i po slocie (kolumny: kolejne dni, wiersze:
+% polozenie kolejno: przed slot 1 przed 10, po slot 1 przed 13, po slot 2
+% po 13, po slot 3 po 16:30)
+
 % DANE RZECZYWISTE
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
+% load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
+% load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
+% load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
+% load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
 
 % Rest = 4, Zest = 7, Dni = 5
 % load testy\dane_testowe_r4_z7_d5\R_4.txt -ascii
@@ -24,6 +38,20 @@ load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
 % load testy\dane_testowe_r4_z7_d5_bez_1000\S.txt -ascii
 % load testy\dane_testowe_r4_z7_d5_bez_1000\poz_cz.txt -ascii
 % R = R_4_bez_1000; Z = Z_7;
+
+% Rest = 1, Zest = 1, Dni = 5
+% load testy\dane_testowe_r1_z1_d5\R_1.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\Z_1.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\S.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\poz_cz.txt -ascii
+% R = R_1; Z = Z_1;
+
+% Rest = 10, Zest = 10, Dni = 10
+load testy\dane_testowe_r10_z10_d10\R.txt -ascii
+load testy\dane_testowe_r10_z10_d10\Z.txt -ascii
+load testy\dane_testowe_r10_z10_d10\S_d10.txt -ascii
+load testy\dane_testowe_r10_z10_d10\poz_cz_d10.txt -ascii
+S = S_d10; poz_cz = poz_cz_d10;
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
@@ -56,12 +84,6 @@ nazwa_rest = {'Dagrasso  ';
               'Zaczek    ';
               'Barek     '};
 
-% macierz restauracji (wiersze: kolejne restauracje, kolumny: dwie pierwsze to polozenie (x,y), trzecia
-% to ocena restauracji (1-10), nastêpne to parami zestawy (cena i czas
-% wykonania)
-% load R.txt -ascii   
-% R=R_2; % dla pliku R_2.txt
-
 % licze ilosc restauracji
 size_R = size(R);
 ilosc_rest = size_R(1);
@@ -80,11 +102,6 @@ nazwa_zestawu = {   'Pizza            ';
                     'Zapiekanka       ';
                     'Pierogi          ';
                     'Precel/dro¿d¿ówka'};
-
-
-% zestawy (wiersze: kcal, czas konsumpcji, ocena, kolumny: kolejne zestawy)
-% load Z.txt -ascii  
-% Z=Z_2; % dla pliku Z_2.txt
 
 % licze ilosc zestawow
 size_Z = size(Z);
@@ -107,12 +124,7 @@ Ep = 700;
 % "pelnosc brzucha"
 E_max = 1000; %energia, ktora maksymalnie na raz mozna miec w sobie
 
-% sloty czasowe - dlogosci (kolumny: kolejne dni, wiersze: sloty kolejno: 
-% slot 1 od 10, slot 2 od 13, slot 3 od 16:30)
-% load S.txt -ascii
-    
-kwadrans_akademicki = 15;
-    
+kwadrans_akademicki = 15;    
     
 % macierz odleglosci knajp od budynkow z zajeciami
 % restauracje \ budynki
@@ -127,13 +139,6 @@ D = [(abs(R(:,1) - poz_bud(1,1)) + abs(R(:,2) - poz_bud(1,2))),...
 D = D./60;
 
 
-%  polozenie czlowieka przed i po slocie (kolumny: kolejne dni, wiersze:
-%  polozenie kolejno: przed slot 1 przed 10, po slot 1 przed 13, po slot 2
-%  po 13, po slot 3 po 16:30)
-load poz_cz.txt -ascii % UWAGA: budynki okreslone sa za pomoca nr tak jak zdefiniowano w linii 16!!!
-
-
 % licze ilosc dni
 size_poz_cz = size(poz_cz);
 ilosc_dni = size_poz_cz(2);
- 
