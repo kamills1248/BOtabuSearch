@@ -223,7 +223,7 @@ end
 % do funkcji przekazujemy druga rzecz "0" lub "1" - "0" oznacza tylko zwroc
 % srednie, "1" - zwroc srednie i narysuj wszystko (wyswietla figury
 % wszystkie)
-[sr_e, sr_b, sr_c] = wyswietl_E_B_C( x_optym, 0 ); 
+[sr_E, sr_B, sr_C] = wyswietl_E_B_C( x_optym, 0 ); 
 
 % tutaj wrzucilam cala reszte, zeby moc mniej komentowac
 % duzo przekazuje do tej funkcji, wiem, ale potem bedzie mozna ja w osobnym
