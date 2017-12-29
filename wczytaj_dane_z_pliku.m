@@ -48,11 +48,23 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 % Rest = 10, Zest = 10, Dni = 10
 % Pamietac, zeby zwiekszyc budzet!
-load testy\dane_testowe_r10_z10_d10\R.txt -ascii
-load testy\dane_testowe_r10_z10_d10\Z.txt -ascii
-load testy\dane_testowe_r10_z10_d10\S_d10.txt -ascii
-load testy\dane_testowe_r10_z10_d10\poz_cz_d10.txt -ascii
+% load testy\dane_testowe_r10_z10_d10\R.txt -ascii
+% load testy\dane_testowe_r10_z10_d10\Z.txt -ascii
+% load testy\dane_testowe_r10_z10_d10\S_d10.txt -ascii
+% load testy\dane_testowe_r10_z10_d10\poz_cz_d10.txt -ascii
+% S = S_d10; poz_cz = poz_cz_d10;
+
+%DEBUG
+
+% Rest = 10, Zest = 10, Dni = 10; tutaj 2 razy to samo (sloty i poz_cz)
+% Pamietac, zeby zwiekszyc budzet!
+load testy\dane_testowe_r10_z10_d10_2x_skopiowane_rzeczywiste\R.txt -ascii
+load testy\dane_testowe_r10_z10_d10_2x_skopiowane_rzeczywiste\Z.txt -ascii
+load testy\dane_testowe_r10_z10_d10_2x_skopiowane_rzeczywiste\S_d10.txt -ascii
+load testy\dane_testowe_r10_z10_d10_2x_skopiowane_rzeczywiste\poz_cz_d10.txt -ascii
 S = S_d10; poz_cz = poz_cz_d10;
+
+%END DEBUG
 
 % BUDYNKI
 nazwa_budynku = {   'B1';

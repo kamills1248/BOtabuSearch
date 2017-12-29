@@ -6,8 +6,9 @@ Bez_bledow = zeros(3,5,3);
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni
 
 %% Losujemy rozwiazanie poczatkowe
-rozw = zeros(3,10); % 3 sloty na dzien, 5 restauracji i 5 zestawow
-
+rozw = zeros(3,2*ilosc_dni); %rozwiazanie: 3 sloty, 2*liczba_dni (bo na 
+    %kazdy dzien restauracja i zestaw)
+    
 for dzien = 1:ilosc_dni
     for slot = 1:3 
         % losowanie restauracji:
