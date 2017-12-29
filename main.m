@@ -1,7 +1,7 @@
 if (exist('summary')) %sprawdza czy to nie pierwszy przebieg gdy nie ma okna
     delete(summary); %zamyka msgbox z podsumowaniem dzialania algorytmu
 end
-clear all;
+% clear all;
 close all; % !!!!!!!!!!!!!!!!!!!!!!!
 
 % dane_testowe;
