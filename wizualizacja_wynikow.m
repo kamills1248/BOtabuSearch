@@ -1,6 +1,5 @@
 function [ ] = wizualizacja_wynikow(fc_wektor_new, fc_wektor_new_tabu, ...
-    fc_wektor_optym, mapa_kolorow, mapa_kolorow_sasiedzi, x_optym, ...
-    iteracje_lim, fc_optym, CAcount)
+    fc_wektor_optym, mapa_kolorow, mapa_kolorow_sasiedzi, x_optym)
 % WIZUALIZACJA OTRZYMANYCH WYNIKOW - przeniesiona z maina
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 x_size = size(x_optym);
@@ -70,18 +69,6 @@ for s = 1:liczba_slotow-1
         'Color','black','LineWidth',3)
 end
 
-%%
-% Podsumowanie przebiegu algorytmu - mozna dodawac kolejne rzeczy
-% w nawiasach klamrowych przecinkami oddzielone kolejne linie, drugi
-% argument msgbox to tytul okienka
-summary = msgbox({sprintf('Liczba iteracji = %d', iteracje_lim), ...
-    sprintf('Najlepsza wartoœæ funkcji celu = %d', fc_optym), ...    
-    sprintf('Liczba zadzia³añ kryterium aspiracji = %d', CAcount),}, ...
-    'Podsumowanie przebiegu algorytmu');
-set(summary, 'position', [100 400 500 100]); % makes box bigger
-    %odleglosc od: lewej strony ekranu, dolu, rozmiar x, rozmiar y
-
-
-
 end
+
 
