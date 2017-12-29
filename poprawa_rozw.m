@@ -1,7 +1,8 @@
 function [ poprawione, wynik ] = poprawa_rozw( rozw )
 global Bledy; %flagi dopuszczalnosci
+global ilosc_dni;
 
-Bez_bledow = zeros(3,5,3);
+Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, liczba dni, 3 rodzaje bledow
 
 poprawioneB = poprawaB(rozw); %funkcja poprawiajaca budzet
 poprawioneC = poprawaC(poprawioneB); %funkcja poprawiajaca czas
