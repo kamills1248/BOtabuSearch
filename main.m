@@ -275,7 +275,7 @@ for s = 1:liczba_slotow-1
         'Color','black','LineWidth',3)
 end
 
-% mapa(x_optym, ilosc_dni);
+% mapa(x_optym);
 wyswietl_E_B_C( x_optym );
 
 %%

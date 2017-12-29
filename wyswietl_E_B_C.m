@@ -88,6 +88,22 @@ end
 % wyliczenie sredniej energii w tygodniu:
 srednia_energia = srednia_energia/ilosc_dni;
 
+<<<<<<< HEAD
+=======
+% wypisanie œredniej energi na subplocie:
+if(mod(ilosc_dni,2)==1) % ten if jest po to, aby ladnie sie wypisalo w odpowiednim oknie
+    subplot(ceil(ilosc_dni/2),2,ilosc_dni+1);
+    text(0,1,'œredni poziom energii w ci¹gu'); 
+    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
+    axis off;
+else
+    subplot(ceil(ilosc_dni/2)+1,2,ilosc_dni+1);
+    text(0,1,'œredni poziom energii w ci¹gu'); 
+    text(0,0.75,['wszystkich dni wynosi ' num2str(srednia_energia) ' kcal']); 
+    axis off;
+end
+
+>>>>>>> 86a5710d172a4d6095d0b3a2e68f0a978c967549
 
 if(rysuj == 1)
     % wypisanie œredniej energi na subplocie:
@@ -136,9 +152,27 @@ end
 % wyliczenie sredniego budzetu:
 sredni_budzet = zaplacone(i)/ilosc_dni;
 
+<<<<<<< HEAD
 % wyliczenie sredniego zuzytego czasu:
 sredni_czas = sum(czas_zuzyty)/i;
 
+=======
+% wypisanie sredniego budzetu:
+subplot(2,2,3)
+text(0,1,'œrednio wydane zosta³o ');
+text(0,0.9,[ num2str(sredni_budzet) ' z³ na dzieñ']);
+axis off;
+
+
+% wyliczenie sredniego zuzytego czasu:
+sredni_czas = sum(czas_zuzyty)/i;
+
+% wypisanie sredniego zuzytego:
+subplot(2,2,4)
+text(0,1,'œrednio wykorzystaliœmy ');
+text(0,0.9,[num2str(sredni_czas) ' minut na jeden slot']);
+axis off;
+>>>>>>> 86a5710d172a4d6095d0b3a2e68f0a978c967549
 
 if(rysuj == 1)
     % wypisanie sredniego budzetu:
