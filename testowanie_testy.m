@@ -38,12 +38,24 @@ while(licznik <= LIMIT)
 end
 
 %liczenie srednich wartosci i odchylen
-for i=2:LIMIT
-   for j=1:6
-       
-   end
-end
+fc_optym_sr = mean(wyniki(:,2));
+fc_optym_odchy = std(wyniki(:,2));
+CAcount_sr = mean(wyniki(:,3));
+CAcount_odchy = std(wyniki(:,3));
+sr_E_sr = mean(wyniki(:,4));
+sr_E_odchy = std(wyniki(:,4));
+sr_B_sr = mean(wyniki(:,5));
+sr_B_odchy = std(wyniki(:,5));
+sr_C_sr = mean(wyniki(:,6));
+sr_C_odchy = std(wyniki(:,6));
 
+% najmniejsza wartosc z fc_optym
+[Min, Nr_best_workspace] = min(wyniki(:,2));
 
+% najgorsza wartosc z fc_optym
+[Max, Nr_worst_workspace] = max(wyniki(:,2));
+
+% dla dwóch powyrzych workspace-ow mozna wyswietlic wizualizacje wynikow i
+% mape
 
 
