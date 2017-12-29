@@ -40,12 +40,18 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 % R = R_4_bez_1000; Z = Z_7;
 
 % Rest = 1, Zest = 1, Dni = 5
-load testy\dane_testowe_r1_z1_d5\R_1.txt -ascii
-load testy\dane_testowe_r1_z1_d5\Z_1.txt -ascii
-load testy\dane_testowe_r1_z1_d5\S.txt -ascii
-load testy\dane_testowe_r1_z1_d5\poz_cz.txt -ascii
-R = R_1; Z = Z_1;
+% load testy\dane_testowe_r1_z1_d5\R_1.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\Z_1.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\S.txt -ascii
+% load testy\dane_testowe_r1_z1_d5\poz_cz.txt -ascii
+% R = R_1; Z = Z_1;
 
+% Rest = 10, Zest = 10, Dni = 10
+load testy\dane_testowe_r10_z10_d10\R.txt -ascii
+load testy\dane_testowe_r10_z10_d10\Z.txt -ascii
+load testy\dane_testowe_r10_z10_d10\S_d10.txt -ascii
+load testy\dane_testowe_r10_z10_d10\poz_cz_d10.txt -ascii
+S = S_d10; poz_cz = poz_cz_d10;
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
