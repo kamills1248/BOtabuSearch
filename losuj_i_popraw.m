@@ -1,9 +1,9 @@
 function [ poprawione, wynik ] = losuj_i_popraw( )
-global Bledy; %flagi dopuszczalnosci
-Bez_bledow = zeros(3,5,3);
-
 %uniwersalne rozmiary macierzy
 global ilosc_zestawow; global ilosc_rest; global ilosc_dni
+global Bledy; %flagi dopuszczalnosci
+Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, liczba dni, 3 rodzaje bledow
+
 
 %% Losujemy rozwiazanie poczatkowe
 rozw = zeros(3,2*ilosc_dni); %rozwiazanie: 3 sloty, 2*liczba_dni (bo na 

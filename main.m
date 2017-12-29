@@ -92,12 +92,12 @@ while(iteracje < iteracje_lim )
                 odleglosc_sasiada = srodek_otoczenia - i; %jak dalego od srodka
                 %dla restauracji
                 neigh_r(i) = neigh_r(i) - odleglosc_sasiada;
-                if(neigh_r(i) < 1) %sprawdzenie czy sie nie przekrecilo
+                while(neigh_r(i) < 1) %sprawdzenie czy sie nie przekrecilo
                     neigh_r(i) = neigh_r(i) + ilosc_rest;
                 end
                 %dla zestawow
                 neigh_k(i) = neigh_k(i) - odleglosc_sasiada;
-                if(neigh_k(i) < 1)
+                while(neigh_k(i) < 1)
                     neigh_k(i) = neigh_k(i) + ilosc_zestawow;
                 end
             end
@@ -107,12 +107,12 @@ while(iteracje < iteracje_lim )
                 odleglosc_sasiada = i - srodek_otoczenia; %jak dalego od srodka
                 %dla restauracji
                 neigh_r(i) = neigh_r(i) + odleglosc_sasiada;
-                if(neigh_r(i) > ilosc_rest) %sprawdzenie czy sie nie przekrecilo
+                while(neigh_r(i) > ilosc_rest) %sprawdzenie czy sie nie przekrecilo
                     neigh_r(i) = neigh_r(i) - ilosc_rest;
                 end
                 %dla zestawow
                 neigh_k(i) = neigh_k(i) + odleglosc_sasiada;
-                if(neigh_k(i) > ilosc_zestawow)
+                while(neigh_k(i) > ilosc_zestawow)
                     neigh_k(i) = neigh_k(i) - ilosc_zestawow;
                 end
             end
