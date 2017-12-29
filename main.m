@@ -13,7 +13,7 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 % Bledy = zeros(3, 5, 3); %sloty, dni, flagi: budzet, czas, energia
 % inicjowane przy pierwszym przebiegu fc
-Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, 5 dni, 3 rodzaje bledow
+Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, liczba dni, 3 rodzaje bledow
 x_zeros = zeros(3,2*ilosc_dni); %rozwiazanie: 3 sloty, 2*liczba_dni (bo na 
     %kazdy dzien restauracja i zestaw)
 
