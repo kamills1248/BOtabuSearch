@@ -1,3 +1,4 @@
+% To wrzucamy do odpowiedniego katalogu z testami
 % przed uruchomieniem wykomentowac w main wyswietlanie wszystkich wynikow
 clear all;
 close all; 
@@ -58,4 +59,8 @@ sr_C_odchy = std(wyniki(:,6));
 % dla dwóch powyrzych workspace-ow mozna wyswietlic wizualizacje wynikow i
 % mape
 
+% Na wszelki wypadek wyniki testu te¿ zapisujemy do pliku .mat
+save('wyniki_testu.mat','wyniki','Min','Nr_best_workspace','Max','Nr_worst_workspace',...
+    'fc_optym_sr','fc_optym_odchy','CAcount_sr','CAcount_odchy','sr_E_sr','sr_E_odchy',...
+    'sr_B_sr','sr_B_odchy','sr_C_sr','sr_C_odchy');
 
