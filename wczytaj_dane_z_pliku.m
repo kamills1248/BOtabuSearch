@@ -115,8 +115,8 @@ if(((size_R(2) - 3)/2) > size_Z(2))
 end
 
 % budzet tygodniowy
-% B = 120;
-B = 240; %budzet na 10 dni
+B = 120;
+% B = 240; %budzet na 10 dni
 
 % energia poczatkowa
 Ep = 700;
@@ -138,7 +138,6 @@ D = [(abs(R(:,1) - poz_bud(1,1)) + abs(R(:,2) - poz_bud(1,2))),...
 % dziele przez 60, poniewaz mapa ma rozmiar 360x900 a zalozylismy, ze
 % przejscie jej z zachodu na wschod zajmuje 15 minut, no i 900/15=60 
 D = D./60;
-
 
 % licze ilosc dni
 size_poz_cz = size(poz_cz);

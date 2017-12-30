@@ -47,7 +47,7 @@ iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; %liczba iteracji bez poprawy wartosci fc_optym
 
 iteracje_lim = 500; %limit liczby iteracji algortymu (ruchow)
-iter_bez_poprawy_lim = 50; %limit liczby iteracji bez poprawy fc_optym gdy
+iter_bez_poprawy_lim = 100; %limit liczby iteracji bez poprawy fc_optym gdy
 %osiagniemy ten limit to losujemy nowe rozwiazanie i zerujemy iter_bez_poprawy
 
 % prealokacja pamieci dla wektorow, zeby bylo jeszcze szybciej
@@ -164,7 +164,7 @@ while(iteracje < iteracje_lim )
     end %end: przejscie po macierzy rozwiazania
 
 
-    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < 50) 
+    if(~isequal(x_new, x_zeros) && iter_bez_poprawy < iter_bez_poprawy_lim) 
     % jesli jest dopuszczalny sasiad i 'niedawno' byla poprawa
       % WYKONAJ RUCH
         if (fc_new < fc_optym) % dla rozwiazania nie z TL
@@ -243,4 +243,3 @@ end
 %     'Podsumowanie przebiegu algorytmu');
 % set(summary, 'position', [100 400 500 100]); % makes box bigger
 %     %odleglosc od: lewej strony ekranu, dolu, rozmiar x, rozmiar y
-
