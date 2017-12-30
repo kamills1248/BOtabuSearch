@@ -17,11 +17,12 @@ Bez_bledow = zeros(3,ilosc_dni,3); %3 sloty, liczba dni, 3 rodzaje bledow
 x_zeros = zeros(3,2*ilosc_dni); %rozwiazanie: 3 sloty, 2*liczba_dni (bo na 
     %kazdy dzien restauracja i zestaw)
 
-%% Losujemy rozwiazanie poczatkowe i poprawiamy je
-[ x_wezel, fc_wezel] = losuj_i_popraw();
+%% Losujemy rozwiazanie poczatkowe i poprawiamy je + pamietamy punkt startowy
+[ x_wezel_pocz, fc_wezel_pocz] = losuj_i_popraw();
 % x_wezel - rozwiazanie w aktualnym wezle
 % fc_wezel - jego wartosc funkcji celu
-
+x_wezel = x_wezel_pocz;
+fc_wezel = fc_wezel_pocz;
 
 %% Przykladowe zapisane rozwiazanie, zeby potestowac parametry
 % load przykladowe_poczatkowe_rozw;
@@ -228,8 +229,9 @@ end
 % tutaj wrzucilam cala reszte, zeby moc mniej komentowac
 % duzo przekazuje do tej funkcji, wiem, ale potem bedzie mozna ja w osobnym
 % skrypcie poza main tez wyswietlic i bedzie git!
-wizualizacja_wynikow(fc_wektor_new, fc_wektor_new_tabu,fc_wektor_optym,...
-    mapa_kolorow, mapa_kolorow_sasiedzi, x_optym);
+
+% wizualizacja_wynikow(fc_wektor_new, fc_wektor_new_tabu,fc_wektor_optym,...
+%     mapa_kolorow, mapa_kolorow_sasiedzi, x_optym);
 
 %%
 % Podsumowanie przebiegu algorytmu - mozna dodawac kolejne rzeczy
