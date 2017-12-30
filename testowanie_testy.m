@@ -1,5 +1,5 @@
 % Instrukcja uzycia:
-% Przed wykonaniem testu w linijce 25 i 67 zmienic sciezke do odpowiedniego
+% Przed wykonaniem testu w linijce 26 i 68 zmienic sciezke do odpowiedniego
 % katalogu! (po 'testy\' a przed nazwa pliku wpisac katalog testu)
 
 % przed uruchomieniem wykomentowac w main wyswietlanie wszystkich wynikow
@@ -7,7 +7,7 @@ clear all;
 close all; 
 
 %liczba wywolan maina
-LIMIT = 3;
+LIMIT = 100;
 
 % tworze macierz wynikow
 wyniki = zeros(LIMIT,6);
@@ -22,6 +22,7 @@ while(licznik <= LIMIT)
     % nie inkrementuje)
     size_warn = size(lastwarn);
     if(size_warn(2) == 0 && size_warn(1) == 0)
+        %UWAGA - na koncu wpisywanej nazwy pliku dobrze dodac podkreslnik _
         nazwa = strcat('testy\dane_testowe_rzeczywiste_r10_z10_d5\dane_testowe_rzeczywiste_r10_z10_d5_',...
             num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
         save(nazwa);
@@ -40,6 +41,10 @@ while(licznik <= LIMIT)
         'fc_wektor_new_tebu','fc_wektor_optym','fc_wezel','x_chwilowe','x_diff',...
         'x_diff','x_new','x_new_tabu','x_optym','x_size','x_wezel'};
     clear(varlist{:})
+    
+%     DEBUG
+licznik
+%     END DEBUG
 end
 
 %liczenie srednich wartosci i odchylen
