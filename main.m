@@ -42,6 +42,9 @@ liczba_slotow = x_size(1); %liczba slotow w danej instancji; zakladamy = 3
 TL = zeros(x_size); %Lista Tabu - zabronienia niedawnych ruchow
 TT = 5; %Tabu Tenure - czas trwania zabronienia
 CAcount = 0; %liczba zadzialan kryterium aspiracji (Aspiration Criteria)
+TLcount = 0; %liczba zabronien - wybieramy sasiada, ktory nie jest na TL, 
+        % chociaz ten z TL bylby lepszy (ale nie jest globalnie najlepszy
+        % bo byloby kryterium aspiracji)
 
 iteracje = 0; %iteracje algorytmu (ruchy)
 iter_bez_poprawy = 0; %liczba iteracji bez poprawy wartosci fc_optym
@@ -180,7 +183,12 @@ while(iteracje < iteracje_lim )
             x_new = x_new_tabu; % zeby moc latwo skorygowac TL
             CAcount = CAcount + 1; %licznik zadzialan kryterium aspiracji
         end
-
+        
+        %liczymy ile razy 'zadzialalo' zabronienie
+        if(fc_new_tabu < fc_new)
+            TLcount = TLcount + 1;
+        end    
+        
         % KOREKTA LISTY TABU
         x_diff = x_new - x_wezel; % sprawdzamy gdzie sie ruszylismy
         for i = 1:3 % Przeiteruj po TL, 
