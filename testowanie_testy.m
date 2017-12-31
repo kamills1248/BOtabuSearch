@@ -10,7 +10,7 @@ close all;
 LIMIT = 100;
 
 % tworze macierz wynikow
-wyniki = zeros(LIMIT,6);
+wyniki = zeros(LIMIT,7);
 
 lastwarn(''); % wyzerowanie ostatniego warninga (teraz jest rowny '' i jego size to [0 0])
 licznik = 1;
@@ -30,12 +30,13 @@ while(licznik <= LIMIT)
         wyniki(licznik, 1) = licznik; % numer workspace'a
         wyniki(licznik, 2) = fc_optym;% optymalna wartosc funkcji celu
         wyniki(licznik, 3) = CAcount; % ile razy zadzialalo kryterium aspisracji
-        wyniki(licznik, 4) = sr_E;    % srednia wartosc energii z calego tygodnia
-        wyniki(licznik, 5) = sr_B;    % srednia ilosc wydanych pieniedzy w jeden slot
-        wyniki(licznik, 6) = sr_C;    % srednia ilosc zurzytego czasu na jeden slot
+        wyniki(licznik, 4) = TLcount; % ile razy "zadzialalo" zabronienie
+        wyniki(licznik, 5) = sr_E;    % srednia wartosc energii z calego tygodnia
+        wyniki(licznik, 6) = sr_B;    % srednia ilosc wydanych pieniedzy w jeden slot
+        wyniki(licznik, 7) = sr_C;    % srednia ilosc zurzytego czasu na jeden slot
         licznik = licznik + 1;
     end
-    lastwarn('');
+    lastwarn(''); % wyzerowanie ostatniego warninga
 %   na wszelki wypadek usuwam te dane zapisane tu
     varlist = {'fc_chwilowe','fc_new','fc_new_tabu','fc_optym','fc_wektor_new',...
         'fc_wektor_new_tebu','fc_wektor_optym','fc_wezel','x_chwilowe','x_diff',...
@@ -52,12 +53,14 @@ fc_optym_sr = mean(wyniki(:,2));
 fc_optym_odchy = std(wyniki(:,2));
 CAcount_sr = mean(wyniki(:,3));
 CAcount_odchy = std(wyniki(:,3));
-sr_E_sr = mean(wyniki(:,4));
-sr_E_odchy = std(wyniki(:,4));
-sr_B_sr = mean(wyniki(:,5));
-sr_B_odchy = std(wyniki(:,5));
-sr_C_sr = mean(wyniki(:,6));
-sr_C_odchy = std(wyniki(:,6));
+TLcount_sr = mean(wyniki(:,4));
+TLcount_odchy = std(wyniki(:,4));
+sr_E_sr = mean(wyniki(:,5));
+sr_E_odchy = std(wyniki(:,5));
+sr_B_sr = mean(wyniki(:,6));
+sr_B_odchy = std(wyniki(:,6));
+sr_C_sr = mean(wyniki(:,7));
+sr_C_odchy = std(wyniki(:,7));
 
 % najmniejsza wartosc z fc_optym
 [Min, Nr_best_workspace] = min(wyniki(:,2));
