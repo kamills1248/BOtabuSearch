@@ -33,18 +33,18 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 % R = R_4; Z = Z_7;
 
 % Rest = 4, Zest = 7, Dni = 5; BEZ '1000' w R
-load testy\dane_testowe_r4_z7_d5_bez_1000\R_4_bez_1000.txt -ascii
-load testy\dane_testowe_r4_z7_d5_bez_1000\Z_7.txt -ascii
-load testy\dane_testowe_r4_z7_d5_bez_1000\S.txt -ascii
-load testy\dane_testowe_r4_z7_d5_bez_1000\poz_cz.txt -ascii
-R = R_4_bez_1000; Z = Z_7;
+% load testy\dane_testowe_r4_z7_d5_bez_1000\R_4_bez_1000.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\Z_7.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\S.txt -ascii
+% load testy\dane_testowe_r4_z7_d5_bez_1000\poz_cz.txt -ascii
+% R = R_4_bez_1000; Z = Z_7;
 
 % Rest = 1, Zest = 1, Dni = 5
-% load testy\dane_testowe_r1_z1_d5\R_1.txt -ascii
-% load testy\dane_testowe_r1_z1_d5\Z_1.txt -ascii
-% load testy\dane_testowe_r1_z1_d5\S.txt -ascii
-% load testy\dane_testowe_r1_z1_d5\poz_cz.txt -ascii
-% R = R_1; Z = Z_1;
+load testy\dane_testowe_r1_z1_d5\R_1.txt -ascii
+load testy\dane_testowe_r1_z1_d5\Z_1.txt -ascii
+load testy\dane_testowe_r1_z1_d5\S.txt -ascii
+load testy\dane_testowe_r1_z1_d5\poz_cz.txt -ascii
+R = R_1; Z = Z_1;
 
 % Rest = 10, Zest = 10, Dni = 10
 % Pamietac, zeby zwiekszyc budzet!
