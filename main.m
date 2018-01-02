@@ -218,6 +218,10 @@ while(iteracje < iteracje_lim )
     fc_wektor_new(iteracje) = fc_new;
     fc_wektor_new_tabu(iteracje) = fc_new_tabu;
     fc_wektor_optym(iteracje) = fc_optym;
+    
+%     DEBUG
+iteracje
+% END DEBUG
 end
 
 %% WIZUALIZACJA OTRZYMANYCH WYNIKOW

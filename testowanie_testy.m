@@ -7,7 +7,7 @@ clear all;
 close all; 
 
 %liczba wywolan maina
-LIMIT = 2;
+LIMIT = 10;
 
 % tworze macierz wynikow
 wyniki = zeros(LIMIT,7);
@@ -23,7 +23,7 @@ while(licznik <= LIMIT)
     size_warn = size(lastwarn);
     if(size_warn(2) == 0 && size_warn(1) == 0)
         %UWAGA - na koncu wpisywanej nazwy pliku dobrze dodac podkreslnik _
-       nazwa = strcat('testy\dane_testowe_r1_z1_d5\dane_testowe_r1_z1_d5_',...
+       nazwa = strcat('testy\dane_testowe_r10_z10_d10\dane_testowe_r10_z10_d10_',...
             num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
        save(nazwa);
         
@@ -74,7 +74,7 @@ sr_C_odchy = std(wyniki(:,7));
 % mape
 
 % Na wszelki wypadek wyniki testu te¿ zapisujemy do pliku .mat
-save('testy\dane_testowe_r1_z1_d5\wyniki_testu.mat','wyniki',...
+save('testy\dane_testowe_r10_z10_d10\wyniki_testu.mat','wyniki',...
     'Min','Nr_best_workspace','Max','Nr_worst_workspace','fc_optym_sr',...
     'fc_optym_odchy','CAcount_sr','CAcount_odchy','sr_E_sr','sr_E_odchy',...
     'sr_B_sr','sr_B_odchy','sr_C_sr','sr_C_odchy');
