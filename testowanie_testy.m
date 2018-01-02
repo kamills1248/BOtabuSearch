@@ -23,9 +23,9 @@ while(licznik <= LIMIT)
     size_warn = size(lastwarn);
     if(size_warn(2) == 0 && size_warn(1) == 0)
         %UWAGA - na koncu wpisywanej nazwy pliku dobrze dodac podkreslnik _
-        nazwa = strcat('testy\dane_testowe_r1_z1_d5\dane_testowe_r1_z1_d5_',...
+       nazwa = strcat('testy\dane_testowe_r1_z1_d5\dane_testowe_r1_z1_d5_',...
             num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
-        save(nazwa);
+       save(nazwa);
         
         wyniki(licznik, 1) = licznik; % numer workspace'a
         wyniki(licznik, 2) = fc_optym;% optymalna wartosc funkcji celu
