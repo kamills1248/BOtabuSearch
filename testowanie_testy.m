@@ -7,7 +7,7 @@ clear all;
 close all; 
 
 %liczba wywolan maina
-LIMIT = 10;
+LIMIT = 100;
 
 % tworze macierz wynikow
 wyniki = zeros(LIMIT,7);
@@ -21,7 +21,7 @@ while(licznik <= LIMIT)
     % pomijamy to rozwiazanie i jeszcze raz uruchamiamy main (licznik sie
     % nie inkrementuje)
     size_warn = size(lastwarn);
-    if(size_warn(2) == 0 && size_warn(1) == 0)
+%     if(size_warn(2) == 0 && size_warn(1) == 0)
         %UWAGA - na koncu wpisywanej nazwy pliku dobrze dodac podkreslnik _
        nazwa = strcat('testy\dane_testowe_r10_z10_d10\dane_testowe_r10_z10_d10_',...
             num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
@@ -35,7 +35,7 @@ while(licznik <= LIMIT)
         wyniki(licznik, 6) = sr_B;    % srednia ilosc wydanych pieniedzy w jeden slot
         wyniki(licznik, 7) = sr_C;    % srednia ilosc zurzytego czasu na jeden slot
         licznik = licznik + 1;
-    end
+%     end
     lastwarn(''); % wyzerowanie ostatniego warninga
 %   na wszelki wypadek usuwam te dane zapisane tu
     varlist = {'fc_chwilowe','fc_new','fc_new_tabu','fc_optym','fc_wektor_new',...
@@ -44,7 +44,7 @@ while(licznik <= LIMIT)
     clear(varlist{:})
     
 %     DEBUG
-licznik = licznik + 1; %!!!!!! inaczej robi sie nieskonczona petla bo 
+% licznik = licznik + 1; %!!!!!! inaczej robi sie nieskonczona petla bo 
                     % nie ma rozwiazania dopuszczalnego
 licznik
 %     END DEBUG
