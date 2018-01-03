@@ -20,10 +20,10 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 % po 13, po slot 3 po 16:30)
 
 % DANE RZECZYWISTE
-% load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
-% load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
-% load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
-% load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
+ load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
+ load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
+ load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
+ load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
 
 % Rest = 4, Zest = 7, Dni = 5
 % load testy\dane_testowe_r4_z7_d5\R_4.txt -ascii
@@ -57,11 +57,11 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 
 % Rest = 10, Zest = 10, Dni = 10; bez 1000
 % Pamietac, zeby zwiekszyc budzet!
-load testy\dane_testowe_r10_z10_d10_bez_1000\R_bez_1000.txt -ascii
-load testy\dane_testowe_r10_z10_d10_bez_1000\Z.txt -ascii
-load testy\dane_testowe_r10_z10_d10_bez_1000\S_d10.txt -ascii
-load testy\dane_testowe_r10_z10_d10_bez_1000\poz_cz_d10.txt -ascii
-S = S_d10; poz_cz = poz_cz_d10; R = R_bez_1000;
+% load testy\dane_testowe_r10_z10_d10_bez_1000\R_bez_1000.txt -ascii
+% load testy\dane_testowe_r10_z10_d10_bez_1000\Z.txt -ascii
+% load testy\dane_testowe_r10_z10_d10_bez_1000\S_d10.txt -ascii
+% load testy\dane_testowe_r10_z10_d10_bez_1000\poz_cz_d10.txt -ascii
+% S = S_d10; poz_cz = poz_cz_d10; R = R_bez_1000;
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
