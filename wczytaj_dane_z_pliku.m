@@ -61,7 +61,7 @@ load testy\dane_testowe_r10_z10_d10_bez_1000\R_bez_1000.txt -ascii
 load testy\dane_testowe_r10_z10_d10_bez_1000\Z.txt -ascii
 load testy\dane_testowe_r10_z10_d10_bez_1000\S_d10.txt -ascii
 load testy\dane_testowe_r10_z10_d10_bez_1000\poz_cz_d10.txt -ascii
-S = S_d10; poz_cz = poz_cz_d10;
+S = S_d10; poz_cz = poz_cz_d10; R = R_bez_1000;
 
 % BUDYNKI
 nazwa_budynku = {   'B1';
