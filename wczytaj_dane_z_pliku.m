@@ -20,17 +20,10 @@ global ilosc_zestawow; global ilosc_rest; global ilosc_dni;
 % po 13, po slot 3 po 16:30)
 
 % DANE RZECZYWISTE
-<<<<<<< HEAD
  load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
  load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
  load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
  load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
-=======
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\R.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\Z.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\S.txt -ascii
-load testy\dane_testowe_rzeczywiste_r10_z10_d5\poz_cz.txt -ascii
->>>>>>> 519a413b005101da5a6dcf2bd1d1732532a3dac3
 
 % Rest = 4, Zest = 7, Dni = 5
 % load testy\dane_testowe_r4_z7_d5\R_4.txt -ascii
