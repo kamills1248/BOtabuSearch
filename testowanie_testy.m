@@ -7,7 +7,7 @@ clear all;
 close all; 
 
 %liczba wywolan maina
-LIMIT = 10;
+LIMIT = 100;
 
 % tworze macierz wynikow
 wyniki = zeros(LIMIT,7);
@@ -21,7 +21,7 @@ while(licznik <= LIMIT)
     % pomijamy to rozwiazanie i jeszcze raz uruchamiamy main (licznik sie
     % nie inkrementuje)
     size_warn = size(lastwarn);
-    if(size_warn(2) == 0 && size_warn(1) == 0)
+%     if(size_warn(2) == 0 && size_warn(1) == 0)
         %UWAGA - na koncu wpisywanej nazwy pliku dobrze dodac podkreslnik _
        nazwa = strcat('testy\dane_testowe_r10_z10_d10_bez_1000\dane_testowe_r10_z10_d10_bez_1000_',...
             num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
@@ -48,7 +48,7 @@ while(licznik <= LIMIT)
                     % nie ma rozwiazania dopuszczalnego
 licznik
 %     END DEBUG
-end
+% end
 
 %liczenie srednich wartosci i odchylen
 fc_optym_sr = mean(wyniki(:,2));
