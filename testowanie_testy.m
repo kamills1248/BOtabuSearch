@@ -35,7 +35,7 @@ while(licznik <= LIMIT)
         wyniki(licznik, 6) = sr_B;    % srednia ilosc wydanych pieniedzy w jeden slot
         wyniki(licznik, 7) = sr_C;    % srednia ilosc zurzytego czasu na jeden slot
         licznik = licznik + 1;
-    end
+%     end
     lastwarn(''); % wyzerowanie ostatniego warninga
 %   na wszelki wypadek usuwam te dane zapisane tu
     varlist = {'fc_chwilowe','fc_new','fc_new_tabu','fc_optym','fc_wektor_new',...
@@ -48,7 +48,7 @@ while(licznik <= LIMIT)
                     % nie ma rozwiazania dopuszczalnego
 licznik
 %     END DEBUG
-% end
+end
 
 %liczenie srednich wartosci i odchylen
 fc_optym_sr = mean(wyniki(:,2));
