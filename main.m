@@ -220,7 +220,7 @@ while(iteracje < iteracje_lim )
     fc_wektor_optym(iteracje) = fc_optym;
     
 %     DEBUG
-% iteracje
+iteracje
 % END DEBUG
 end
 
