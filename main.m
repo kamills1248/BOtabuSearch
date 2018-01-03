@@ -40,7 +40,7 @@ liczba_slotow = x_size(1); %liczba slotow w danej instancji; zakladamy = 3
 %        %po 2 kolumny - restauracje i zestawy; moze sie zmieniac
 
 TL = zeros(x_size); %Lista Tabu - zabronienia niedawnych ruchow
-TT = 4; %Tabu Tenure - czas trwania zabronienia
+TT = 7; %Tabu Tenure - czas trwania zabronienia
 CAcount = 0; %liczba zadzialan kryterium aspiracji (Aspiration Criteria)
 TLcount = 0; %liczba zabronien - wybieramy sasiada, ktory nie jest na TL, 
         % chociaz ten z TL bylby lepszy (ale nie jest globalnie najlepszy
@@ -220,7 +220,7 @@ while(iteracje < iteracje_lim )
     fc_wektor_optym(iteracje) = fc_optym;
     
 %     DEBUG
-iteracje
+% iteracje
 % END DEBUG
 end
 
