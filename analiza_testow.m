@@ -2,7 +2,7 @@ clear all;
 % close all; 
 
 global Bledy;
-load('testy\dane_testowe_rzeczywiste_r10_z10_d5\wyniki_testu.mat');
+load('testy\dane_testowe_r10_z10_d10\wyniki_testu.mat');
 
 % Uwaga, okazalo sie, ze nie zapisywalismy tego osobno w pliku dlatego
 % trzeba tu jeszzce raz wyciagnac to z wynikow
@@ -11,39 +11,39 @@ TLcount_odchy = std(wyniki(:,4));
 
 % Dla szybszego kopiowania danych:
 Tabela_wynikow_1 = {'minimalna osi¹gniêta wartoœæ fc                                   ';
-                    'maksymalna osi¹gniêta wartoœæ fc                                  ';
                     'œrednia wartoœæ fc                                                ';
+                    'maksymalna osi¹gniêta wartoœæ fc                                  ';
                     'odchylenie wartosci fc                                            ';
                     'œrednia liczba zadzia³añ kryterium aspiracjii                     ';
-                    'odchylenie liczby zadzia³añ kryterium aspiracji                   ';
                     'œrednia liczba zadzia³añ zabronienia                              ';
-                    'odchylenie liczby zadzia³añ zabronienia                           ';
                     'œrednia ze œredniej wartoœci energii w ci¹gu tygodnia             ';
-                    'odchylenie ze œredniej wartoœci energii w ci¹gu tygodnia          ';
                     'œrednia ze œredniej wartoœci pieniêdzy  wydanych w ci¹gu slotu    ';
+                    'œrednia ze œredniej wartoœci czasu wykorzystanego w ci¹gu slotu   ';                    
+                    'odchylenie liczby zadzia³añ kryterium aspiracji                   ';
+                    'odchylenie liczby zadzia³añ zabronienia                           ';
+                    'odchylenie ze œredniej wartoœci energii w ci¹gu tygodnia          ';
                     'odchylenie ze œredniej wartoœci pieniêdzy  wydanych w ci¹gu slotu ';
-                    'œrednia ze œredniej wartoœci czasu wykorzystanego w ci¹gu slotu   ';
                     'odchylenie ze œredniej wartoœci czasu wykorzystanego w ci¹gu slotu'};                
 Tabela_wynikow_2 = [Min;
-                    Max;
                     fc_optym_sr;
+                    Max;
                     fc_optym_odchy;
                     CAcount_sr;
-                    CAcount_odchy;
                     TLcount_sr;
-                    TLcount_odchy;
                     sr_E_sr;
-                    sr_E_odchy;
                     sr_B_sr;
-                    sr_B_odchy;
                     sr_C_sr;
+                    CAcount_odchy;                    
+                    TLcount_odchy;                    
+                    sr_E_odchy;                    
+                    sr_B_odchy;                    
                     sr_C_odchy];               
 
             
 %% BEST i wizualizacja
 
 licznik = Nr_best_workspace; %zeby bylo jawnie
-nazwa = strcat('testy\dane_testowe_rzeczywiste_r10_z10_d5\dane_testowe_rzeczywiste_r10_z10_d5_',...
+nazwa = strcat('testy\dane_testowe_r10_z10_d10_bez_1000_uwaga_TT_4\dane_testowe_r10_z10_d10_bez_1000_',...
     num2str(licznik),'.mat'); % tutaj tworzymy nazwe pliku (taka jak liczba iteracji)
 load(nazwa);
 
