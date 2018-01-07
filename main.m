@@ -1,7 +1,7 @@
 if (exist('summary')) %sprawdza czy to nie pierwszy przebieg gdy nie ma okna
     delete(summary); %zamyka msgbox z podsumowaniem dzialania algorytmu
 end
-% clear all;
+clear all;
 close all; % !!!!!!!!!!!!!!!!!!!!!!!
 
 % dane_testowe;
@@ -52,6 +52,10 @@ iter_bez_poprawy = 0; %liczba iteracji bez poprawy wartosci fc_optym
 iteracje_lim = 500; %limit liczby iteracji algortymu (ruchow)
 iter_bez_poprawy_lim = 100; %limit liczby iteracji bez poprawy fc_optym gdy
 %osiagniemy ten limit to losujemy nowe rozwiazanie i zerujemy iter_bez_poprawy
+%zadajemy liczbe sasiadow
+liczba_sasiadow = 5; %liczba sasiadow w wierszu i kolumnie + 1 
+    %bo uwzgledniamy srodek otoczenia; 'kwadratowe' otoczenie
+srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
 
 % prealokacja pamieci dla wektorow, zeby bylo jeszcze szybciej
 fc_wektor_new = zeros(1, iteracje_lim);
@@ -78,13 +82,8 @@ while(iteracje < iteracje_lim )
             % dodajemy 1 do mapy kolorow rozwiazania
             mapa_kolorow((slot-1)*ilosc_zestawow+k,(dzien-1)*ilosc_rest+r) =...
                 mapa_kolorow((slot-1)*ilosc_zestawow+k,(dzien-1)*ilosc_rest+r) + 1; 
+
             
-              
-            %zadajemy liczbe sasiadow
-            liczba_sasiadow = 5; %liczba sasiadow w wierszu i kolumnie + 1 
-                %bo uwzgledniamy srodek otoczenia; 'kwadratowe' otoczenie
-            srodek_otoczenia = ceil(liczba_sasiadow/2); %nr srodka otoczenia
-        
             %wyznaczenie indeksow sasiadow
             %sasiednie restauracje
             neigh_r = ones(1, liczba_sasiadow) * r; %wszedzie wpisuje srodek otoczenia
@@ -219,9 +218,6 @@ while(iteracje < iteracje_lim )
     fc_wektor_new_tabu(iteracje) = fc_new_tabu;
     fc_wektor_optym(iteracje) = fc_optym;
     
-%     DEBUG
-% iteracje
-% END DEBUG
 end
 
 %% WIZUALIZACJA OTRZYMANYCH WYNIKOW
@@ -229,29 +225,29 @@ end
 % nie wyswietlajac za kazdym razem wszystkiego ponizsze rzeczy musza byc
 % wykomentowane!!!
 
-% mapa(x_optym);
+mapa(x_optym);
 
 % zwracamy srednie, zeby potem moc je zapisac w wokrspace i ew sprawdzic 
 % jakie byly bez rysowania wszystkiego
 % do funkcji przekazujemy druga rzecz "0" lub "1" - "0" oznacza tylko zwroc
 % srednie, "1" - zwroc srednie i narysuj wszystko (wyswietla figury
 % wszystkie)
-[sr_E, sr_B, sr_C] = wyswietl_E_B_C( x_optym, 0 ); 
+[sr_E, sr_B, sr_C] = wyswietl_E_B_C( x_optym, 1 ); 
 
 % tutaj wrzucilam cala reszte, zeby moc mniej komentowac
 % duzo przekazuje do tej funkcji, wiem, ale potem bedzie mozna ja w osobnym
 % skrypcie poza main tez wyswietlic i bedzie git!
 
-% wizualizacja_wynikow(fc_wektor_new, fc_wektor_new_tabu,fc_wektor_optym,...
-%     mapa_kolorow, mapa_kolorow_sasiedzi, x_optym);
+wizualizacja_wynikow(fc_wektor_new, fc_wektor_new_tabu,fc_wektor_optym,...
+    mapa_kolorow, mapa_kolorow_sasiedzi, x_optym);
 
 %%
 % Podsumowanie przebiegu algorytmu - mozna dodawac kolejne rzeczy
 % w nawiasach klamrowych przecinkami oddzielone kolejne linie, drugi
 % argument msgbox to tytul okienka
-% summary = msgbox({sprintf('Liczba iteracji = %d', iteracje_lim), ...
-%     sprintf('Najlepsza wartoœæ funkcji celu = %d', fc_optym), ...    
-%     sprintf('Liczba zadzia³añ kryterium aspiracji = %d', CAcount),}, ...
-%     'Podsumowanie przebiegu algorytmu');
-% set(summary, 'position', [100 400 500 100]); % makes box bigger
-%     %odleglosc od: lewej strony ekranu, dolu, rozmiar x, rozmiar y
+summary = msgbox({sprintf('Liczba iteracji = %d', iteracje_lim), ...
+    sprintf('Najlepsza wartoœæ funkcji celu = %d', fc_optym), ...    
+    sprintf('Liczba zadzia³añ kryterium aspiracji = %d', CAcount),}, ...
+    'Podsumowanie przebiegu algorytmu');
+set(summary, 'position', [100 400 500 100]); % makes box bigger
+    %odleglosc od: lewej strony ekranu, dolu, rozmiar x, rozmiar y
